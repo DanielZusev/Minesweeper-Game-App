@@ -65,7 +65,7 @@
         android:gravity="center"
         android:text="@string/start_button"
         android:background="@drawable/start_button_shape"
-        android:onClick="START_GAME"> <!--TODO method name need to be changed-->
+        > <!--TODO method name need to be changed-->
     </Button>
 
 </LinearLayout>
