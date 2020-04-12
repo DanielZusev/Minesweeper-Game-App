@@ -39,13 +39,32 @@ public class Cell {
         return mState;
     }
 
-    public Boolean OnClick(boolean isFlagged) {
+    public Boolean OnClick(boolean isFlagged,int howManyMinesAround) {
         if (isFlagged) {
             ToggleFlage();
             return null;
         }
         if(this.mState==State.UNCOVERED){
-            setStateToCovered();
+            switch ((howManyMinesAround)) {
+                case 0:
+                setStateToCovered();
+               
+                case 1:
+                    setState(State.ONE);
+                    
+                case 2:
+                    setState(State.TWO);
+                   
+                case 3:
+                    setState(State.THREE);
+                   
+                case 4:
+                    setState(State.FOUR);
+
+                    break;
+                default:
+                    throw new IllegalStateException("Unexpected value: " + (howManyMinesAround));
+            }
             return this.isMined;
         }
         return null;

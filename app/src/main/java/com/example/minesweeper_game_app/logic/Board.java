@@ -26,12 +26,51 @@ public class Board {
     }
 
     public Boolean OnClick(int pos,boolean isFlagged){
-       return mCells[pos].OnClick(isFlagged);
+       int minesAround=CheckHowManyMinesAround(pos);
+
+       Boolean isMined=mCells[pos].OnClick(isFlagged,minesAround);
+       if(!isMined&&minesAround==0){
+        OnClickAround(pos);
+       }
+       return isMined;
+    }
+    private void OnClickAround(int pos){
+        OnClick(pos+1,false);
+        OnClick(pos-1,false);
+        OnClick(pos+1+this.mCells.length,false);
+        OnClick(pos+this.mCells.length,false);
+        OnClick(pos-this.mCells.length,false);
+        OnClick(pos+1-this.mCells.length,false);
+        OnClick(pos-1-this.mCells.length,false);
+        OnClick(pos-1+this.mCells.length,false);
+
     }
     public int getBoardSize(){
         return this.mCells.length;
     }
     public Cell getCell(int pos){
         return mCells[pos];
+    }
+    private int CheckHowManyMinesAround(int pos) {
+        int minesCount = 0;
+        int boardSize = mCells.length;
+        //cell at first col
+        if (mCells[pos + 1].isMined())
+            minesCount++;
+        if (mCells[pos + boardSize].isMined())
+            minesCount++;
+        if (mCells[pos + boardSize + 1].isMined())
+            minesCount++;
+        if (mCells[pos - 1].isMined())
+            minesCount++;
+        if (mCells[pos - boardSize].isMined())
+            minesCount++;
+        if (mCells[pos - boardSize - 1].isMined())
+            minesCount++;
+        if (mCells[pos - boardSize + 1].isMined())
+            minesCount++;
+        if (mCells[pos + boardSize - 1].isMined())
+            minesCount++;
+        return minesCount;
     }
 }
