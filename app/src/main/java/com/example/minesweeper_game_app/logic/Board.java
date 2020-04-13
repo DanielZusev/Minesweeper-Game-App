@@ -35,6 +35,7 @@ public class Board {
        return isMined;
     }
     private void OnClickAround(int pos){
+        //TODO check the pos and do OnClick  pos logic - only the cells around
         OnClick(pos+1,false);
         OnClick(pos-1,false);
         OnClick(pos+1+this.mCells.length,false);
@@ -52,6 +53,7 @@ public class Board {
         return mCells[pos];
     }
     private int CheckHowManyMinesAround(int pos) {
+        //TODO pos logic - only the cells around
         int minesCount = 0;
         int boardSize = mCells.length;
         //cell at first col
