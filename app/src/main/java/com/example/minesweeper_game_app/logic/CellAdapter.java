@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import com.example.minesweeper_game_app.CellView;
+
 public class CellAdapter extends BaseAdapter {
 
     private static final String TAG = "Cell Adapter";
@@ -34,7 +36,19 @@ public class CellAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        //TODO TileView class
-        return null;
+
+
+        CellView tileView;
+
+        tileView = (CellView)convertView;
+        if(tileView == null) {
+            Log.d(TAG, "View created " + position);
+            tileView = new CellView(mContext);
+        }
+
+        Cell tile = mBoard.getCell(position);
+        tileView.setText(tile.getmState().toString());
+        Log.d(TAG, "View returned " + position);
+        return tileView;
     }
 }
