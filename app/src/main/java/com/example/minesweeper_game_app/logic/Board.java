@@ -6,7 +6,7 @@ public class Board {
     private Cell[] mCells;
 
     public Board(int mSize){
-        this.mCells = new Cell[mSize];
+        this.mCells = new Cell[mSize*mSize];
         CreateNewBoard(mSize);
     }
     public void CreateNewBoard(int mSize){

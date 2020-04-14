@@ -9,10 +9,11 @@ public class Game {
     private int boardSize;
     private Timer timer;
     public int cellsToWinCount;
+
     public Game(int boardSize){
         this.mBoard=new Board(boardSize);
         this.isFlagged=false;
-        this.timer=new Timer();
+        //this.timer=new Timer();
         StartTimer();
     }
     public void OnClick(int pos){
@@ -47,5 +48,9 @@ public class Game {
     }
     private void StopTimer(){
         //TODO timer
+    }
+
+    public Board getmBoard() {
+        return this.mBoard;
     }
 }
