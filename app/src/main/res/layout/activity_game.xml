@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.minesweeper_game_app.GameActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:id="@+id/playerTurnTextView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:textAlignment="center"
+            android:gravity="center_vertical"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_weight="1"
+            android:text=" "
+            tools:ignore="RtlCompat" />
+
+        <GridView
+            android:id="@+id/gridView"
+            android:columnWidth="60dp"
+            android:verticalSpacing="1dp"
+            android:horizontalSpacing="1dp"
+            android:background="@color/colorGridBackground"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_weight="10" />
+
+        <ProgressBar
+            android:id="@+id/progressCircle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:indeterminate="true"
+            android:layout_weight="1"
+            android:visibility="invisible"
+            />
+
+
+    </LinearLayout>
+
+</RelativeLayout>

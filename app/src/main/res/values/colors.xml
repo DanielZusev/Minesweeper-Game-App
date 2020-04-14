@@ -4,4 +4,5 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="difficulty_button_pressed">#C4C2C2</color>
+    <color name="colorGridBackground">#D6CACA</color>
 </resources>

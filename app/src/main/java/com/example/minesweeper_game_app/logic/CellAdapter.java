@@ -38,17 +38,17 @@ public class CellAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 
 
-        CellView tileView;
+        CellView cellView;
 
-        tileView = (CellView)convertView;
-        if(tileView == null) {
+        cellView = (CellView)convertView;
+        if(cellView == null) {
             Log.d(TAG, "View created " + position);
-            tileView = new CellView(mContext);
+            cellView = new CellView(mContext);
         }
 
-        Cell tile = mBoard.getCell(position);
-        tileView.setText(tile.getmState().toString());
+        Cell cell = mBoard.getCell(position);
+        cellView.setText(cell.getmState().toString());
         Log.d(TAG, "View returned " + position);
-        return tileView;
+        return cellView;
     }
 }
