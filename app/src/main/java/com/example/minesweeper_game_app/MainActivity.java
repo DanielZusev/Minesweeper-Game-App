@@ -9,9 +9,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
     private Button button;
-    private static final int EASY = 4;
+    private static final int EASY = 5;
     private static final int HARD = 6;
-    private static final int EXTREME = 8;
+    private static final int EXTREME = 7;
     private Integer choose = null;
 
     @Override

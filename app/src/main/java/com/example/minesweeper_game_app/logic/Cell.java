@@ -4,20 +4,6 @@ public class Cell {
 
     public enum State {
         UNCOVERED, COVERED, FLAGGED, ONE, TWO, THREE, FOUR;
-
-        @Override
-        public String toString() {
-            switch (this) {
-                case UNCOVERED:
-                    return "U";
-                case COVERED:
-                    return "C";
-                case FLAGGED:
-                    return "F";
-                default:
-                    return "";
-            }
-        }
     }
 
     private State mState;
@@ -45,26 +31,27 @@ public class Cell {
             ToggleFlage();
             return null;
         }
-        if (this.mState == State.UNCOVERED) {
+        else if (this.mState == State.UNCOVERED) {
             switch ((howManyMinesAround)) {
                 case 0:
                     setStateToCovered();
-
+                    break;
                 case 1:
                     setState(State.ONE);
-
+                    break;
                 case 2:
                     setState(State.TWO);
-
+                    break;
                 case 3:
                     setState(State.THREE);
-
+                    break;
                 case 4:
                     setState(State.FOUR);
 
                     break;
                 default:
-                    throw new IllegalStateException("Unexpected value: " + (howManyMinesAround));
+                   // throw new IllegalStateException("Unexpected value: " + (howManyMinesAround));
+
             }
             return this.isMined;
         }

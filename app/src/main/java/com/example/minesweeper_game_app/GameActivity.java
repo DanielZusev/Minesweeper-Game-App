@@ -53,6 +53,7 @@ public class GameActivity extends AppCompatActivity {
                 mGame.getmBoard().CreateNewBoard();
                 timer.setBase(SystemClock.elapsedRealtime());
                 timer.start();
+                mCellAdapter.notifyDataSetChanged();
             }
         });
 

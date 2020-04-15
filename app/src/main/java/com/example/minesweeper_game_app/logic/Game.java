@@ -10,18 +10,23 @@ public class Game {
     public int cellsToWinCount;
 
     public Game(int boardSize) {
+        this.boardSize=boardSize;
         this.mBoard = new Board(boardSize);
+
         this.isFlagged = false;
 
 
     }
 
     public void OnClick(int pos) {
+        Boolean clickValue = mBoard.OnClick(pos, isFlagged);
+        if(clickValue==null)
+            return;
         //click on mine
-        if (!mBoard.OnClick(pos, isFlagged))
+        else if (clickValue)
             GameOver();
             //click on UNCOVERED cell
-        else if (mBoard.OnClick(pos, isFlagged)) {
+        else {
             cellsToWinCount--;
             if (cellsToWinCount == 0)
                 Victory();

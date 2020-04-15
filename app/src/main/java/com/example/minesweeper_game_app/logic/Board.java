@@ -25,7 +25,7 @@ public class Board {
         Random r = new Random();
         int minePos;
 
-        for (int i = 0; i < this.mSize * 2; i++) {
+        for (int i = 0; i < this.mSize ; i++) {
             minePos = r.nextInt(this.mSize * this.mSize);
 
             if (mCells[minePos].isMined())
@@ -39,6 +39,8 @@ public class Board {
         int minesAround = CheckHowManyMinesAround(pos);
 
         Boolean isMined = mCells[pos].OnClick(isFlagged, minesAround);
+        if(isMined==null)
+            return null;
         if (!isMined && minesAround == 0) {
             OnClickAround(pos);
         }
@@ -84,21 +86,21 @@ public class Board {
     private int CheckHowManyMinesAround(int pos) {
         int minesCount = 0;
 
-        if (mCells[pos + 1].isMined() && isCellValid(pos + 1))
+        if ( isCellValid(pos + 1)&&mCells[pos + 1].isMined() )
             minesCount++;
-        if (mCells[pos - 1].isMined() && isCellValid(pos - 1))
+        if (isCellValid(pos - 1)&&mCells[pos - 1].isMined()  )
             minesCount++;
-        if (mCells[pos + 1 + this.mSize].isMined() && isCellValid(pos + 1 + this.mSize))
+        if (isCellValid(pos + 1 + this.mSize)&&mCells[pos + 1 + this.mSize].isMined() )
             minesCount++;
-        if (mCells[pos + this.mSize].isMined() && isCellValid(pos + this.mSize))
+        if (isCellValid(pos + this.mSize)&&mCells[pos + this.mSize].isMined() )
             minesCount++;
-        if (mCells[pos - this.mSize].isMined() && isCellValid(pos - this.mSize))
+        if ( isCellValid(pos - this.mSize)&&mCells[pos - this.mSize].isMined())
             minesCount++;
-        if (mCells[pos + 1 - this.mSize].isMined() && isCellValid(pos + 1 - this.mSize))
+        if (isCellValid(pos + 1 - this.mSize)&&mCells[pos + 1 - this.mSize].isMined() )
             minesCount++;
-        if (mCells[pos - 1 - this.mSize].isMined() && isCellValid(pos - 1 - this.mSize))
+        if (  isCellValid(pos - 1 - this.mSize)&&mCells[pos - 1 - this.mSize].isMined())
             minesCount++;
-        if (mCells[pos - 1 + this.mSize].isMined() && isCellValid(pos - 1 + this.mSize))
+        if ( isCellValid(pos - 1 + this.mSize)&&mCells[pos - 1 + this.mSize].isMined() )
             minesCount++;
 
         return minesCount;

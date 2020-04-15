@@ -34,11 +34,25 @@ public class CellView extends LinearLayout {
         switch (state){
             case UNCOVERED:
                 mImageView.setImageResource(R.drawable.facing_down);
+                break;
             case FLAGGED:
                 mImageView.setImageResource(R.drawable.flagged);
-
+                break;
+            case COVERED:
+                mImageView.setImageResource(R.drawable.zero);
+                break;
+            case ONE:
+                mImageView.setImageResource(R.drawable.one);
+                break;
+            case TWO:
+                mImageView.setImageResource(R.drawable.two);
+                break;
+            case THREE:
+                mImageView.setImageResource(R.drawable.three);
+                break;
+            case FOUR:
+                mImageView.setImageResource(R.drawable.four);
+                break;
         }
-
-
     }
 }
