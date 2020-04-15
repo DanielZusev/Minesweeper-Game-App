@@ -37,7 +37,6 @@ public class CellView extends LinearLayout {
             case FLAGGED:
                 mImageView.setImageResource(R.drawable.flagged);
 
-
         }
 
 

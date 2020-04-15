@@ -5,53 +5,58 @@ import java.util.Random;
 public class Board {
     private Cell[] mCells;
 
-    public Board(int mSize){
-        this.mCells = new Cell[mSize*mSize];
+    public Board(int mSize) {
+        this.mCells = new Cell[mSize * mSize];
         CreateNewBoard(mSize);
     }
-    public void CreateNewBoard(int mSize){
+
+    public void CreateNewBoard(int mSize) {
         //create cells
-        for(int i=0;i<mSize*mSize;i++)
+        for (int i = 0; i < mSize * mSize; i++)
             this.mCells[i] = new Cell();
         //put mines at random positions
-        Random r =new Random();
+        Random r = new Random();
         int minePos;
-        for(int i=0;i<mSize;i++){
-            minePos=r.nextInt(mSize);
-            if(mCells[minePos].isMined())
+        for (int i = 0; i < mSize; i++) {
+            minePos = r.nextInt(mSize);
+            if (mCells[minePos].isMined())
                 i--;
             else
                 mCells[minePos].setMined(true);
         }
     }
 
-    public Boolean OnClick(int pos,boolean isFlagged){
-       int minesAround=CheckHowManyMinesAround(pos);
+    public Boolean OnClick(int pos, boolean isFlagged) {
+        int minesAround = CheckHowManyMinesAround(pos);
 
-       Boolean isMined=mCells[pos].OnClick(isFlagged,minesAround);
-       if(!isMined&&minesAround==0){
-        OnClickAround(pos);
-       }
-       return isMined;
+        Boolean isMined = mCells[pos].OnClick(isFlagged, minesAround);
+        if (!isMined && minesAround == 0) {
+            OnClickAround(pos);
+        }
+        return isMined;
     }
-    private void OnClickAround(int pos){
+
+    private void OnClickAround(int pos) {
         //TODO check the pos and do OnClick  pos logic - only the cells around
-        OnClick(pos+1,false);
-        OnClick(pos-1,false);
-        OnClick(pos+1+this.mCells.length,false);
-        OnClick(pos+this.mCells.length,false);
-        OnClick(pos-this.mCells.length,false);
-        OnClick(pos+1-this.mCells.length,false);
-        OnClick(pos-1-this.mCells.length,false);
-        OnClick(pos-1+this.mCells.length,false);
+        OnClick(pos + 1, false);
+        OnClick(pos - 1, false);
+        OnClick(pos + 1 + this.mCells.length, false);
+        OnClick(pos + this.mCells.length, false);
+        OnClick(pos - this.mCells.length, false);
+        OnClick(pos + 1 - this.mCells.length, false);
+        OnClick(pos - 1 - this.mCells.length, false);
+        OnClick(pos - 1 + this.mCells.length, false);
 
     }
-    public int getBoardSize(){
+
+    public int getBoardSize() {
         return this.mCells.length;
     }
-    public Cell getCell(int pos){
+
+    public Cell getCell(int pos) {
         return mCells[pos];
     }
+
     private int CheckHowManyMinesAround(int pos) {
         //TODO pos logic - only the cells around
         int minesCount = 0;

@@ -27,6 +27,7 @@ public class GameActivity extends AppCompatActivity {
     Chronometer timer;
 
     int boardSize;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,12 +35,12 @@ public class GameActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_game);
 
-        boardSize=getIntent().getIntExtra("BOARD_SIZE",0);
+        boardSize = getIntent().getIntExtra("BOARD_SIZE", 0);
         mGame = new Game(boardSize);
 
         mGridView = findViewById(R.id.gridView);
-        restartButton =findViewById(R.id.restart_button);
-        flagButton =(ImageView)findViewById(R.id.flag_button);
+        restartButton = findViewById(R.id.restart_button);
+        flagButton = (ImageView) findViewById(R.id.flag_button);
 
         mGridView.setNumColumns(boardSize);
         mCellAdapter = new CellAdapter(this, mGame.getmBoard());
@@ -70,7 +71,7 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mGame.ToggleFlagged();
-                if(mGame.isFlagged())
+                if (mGame.isFlagged())
                     flagButton.setImageResource(R.drawable.flag_on);
                 else
                     flagButton.setImageResource(R.drawable.flagged);
