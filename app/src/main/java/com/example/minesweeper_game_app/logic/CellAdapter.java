@@ -47,7 +47,7 @@ public class CellAdapter extends BaseAdapter {
         }
 
         Cell cell = mBoard.getCell(position);
-        cellView.setText(cell.getmState().toString());
+        cellView.setText(cell.getmState());
         Log.d(TAG, "View returned " + position);
         return cellView;
     }
