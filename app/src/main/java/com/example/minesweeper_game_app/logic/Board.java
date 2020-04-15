@@ -7,6 +7,7 @@ public class Board {
     private int mSize;
 
     public Board(int mSize) {
+
         setmSize(mSize);
         this.mCells = new Cell[this.mSize * this.mSize];
         CreateNewBoard();
@@ -23,8 +24,10 @@ public class Board {
         //put mines at random positions
         Random r = new Random();
         int minePos;
+
         for (int i = 0; i < this.mSize * 2; i++) {
             minePos = r.nextInt(this.mSize * this.mSize);
+
             if (mCells[minePos].isMined())
                 i--;
             else
@@ -41,6 +44,7 @@ public class Board {
         }
         return isMined;
     }
+
 
     private void OnClickAround(int pos) {
         if (isCellValid(pos + 1)) {

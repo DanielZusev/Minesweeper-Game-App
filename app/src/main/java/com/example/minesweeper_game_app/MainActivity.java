@@ -11,43 +11,45 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
     private Button button;
-    private static final int EASY=4;
-    private static final int HARD=6;
-    private static final int EXTREME=8;
-    private Integer choose=null;
+    private static final int EASY = 4;
+    private static final int HARD = 6;
+    private static final int EXTREME = 8;
+    private Integer choose = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        button=(Button)findViewById(R.id.start_button);
+        button = (Button) findViewById(R.id.start_button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(choose!=null){
+                if (choose != null) {
                     openGameActivity(choose);
                 }
             }
         });
-
     }
 
     public void openGameActivity(int boardSize) {
-        Intent intent = new Intent(this,GameActivity.class);
-        intent.putExtra("BOARD_SIZE",boardSize);
+        Intent intent = new Intent(this, GameActivity.class);
+        intent.putExtra("BOARD_SIZE", boardSize);
         startActivity(intent);
     }
+
     public void CHOOSE_EASY(View v) {
-        choose=EASY;
+        choose = EASY;
         v.setBackgroundColor(Color.GRAY);
 
     }
+
     public void CHOOSE_HARD(View v) {
-        choose=HARD;
+        choose = HARD;
         v.setBackgroundColor(Color.GRAY);
     }
+
     public void CHOOSE_EXTREME(View v) {
-        choose=EXTREME;
+        choose = EXTREME;
         v.setBackgroundColor(Color.GRAY);
     }
 }

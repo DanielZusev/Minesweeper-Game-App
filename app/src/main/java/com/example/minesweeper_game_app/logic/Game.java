@@ -1,4 +1,5 @@
 package com.example.minesweeper_game_app.logic;
+
 public class Game {
     private Board mBoard;
 
@@ -8,40 +9,44 @@ public class Game {
 
     public int cellsToWinCount;
 
-    public Game(int boardSize){
-        this.mBoard=new Board(boardSize);
-        this.isFlagged=false;
+    public Game(int boardSize) {
+        this.mBoard = new Board(boardSize);
+        this.isFlagged = false;
 
 
     }
-    public void OnClick(int pos){
+
+    public void OnClick(int pos) {
         //click on mine
-        if(!mBoard.OnClick(pos,isFlagged))
+        if (!mBoard.OnClick(pos, isFlagged))
             GameOver();
-        //click on UNCOVERED cell
-        else if(mBoard.OnClick(pos,isFlagged)){
+            //click on UNCOVERED cell
+        else if (mBoard.OnClick(pos, isFlagged)) {
             cellsToWinCount--;
-            if(cellsToWinCount==0)
+            if (cellsToWinCount == 0)
                 Victory();
         }
-            
+
     }
-    public void ToggleFlagged(){
-        if(this.isFlagged)
-            this.isFlagged=false;
-        else this.isFlagged=true;
+
+    public void ToggleFlagged() {
+        if (this.isFlagged)
+            this.isFlagged = false;
+        else this.isFlagged = true;
     }
+
     private void Victory() {
         //TODO victory logic
     }
 
-    public void GameOver(){
+    public void GameOver() {
         //TODO GameOver logic
     }
 
     public Board getmBoard() {
         return this.mBoard;
     }
+
     public boolean isFlagged() {
         return isFlagged;
     }
