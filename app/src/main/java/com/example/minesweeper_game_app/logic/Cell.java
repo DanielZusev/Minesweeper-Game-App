@@ -3,10 +3,11 @@ package com.example.minesweeper_game_app.logic;
 public class Cell {
 
     public enum State {
-        UNCOVERED,COVERED,FLAGGED,ONE,TWO,THREE,FOUR;
+        UNCOVERED, COVERED, FLAGGED, ONE, TWO, THREE, FOUR;
+
         @Override
         public String toString() {
-            switch(this) {
+            switch (this) {
                 case UNCOVERED:
                     return "U";
                 case COVERED:
@@ -22,9 +23,9 @@ public class Cell {
     private State mState;
     private boolean isMined;
 
-    public Cell(){
-        this.isMined=false;
-        mState=State.UNCOVERED;
+    public Cell() {
+        setMined(false);
+        setState(State.COVERED);
     }
 
     public boolean isMined() {
@@ -39,25 +40,33 @@ public class Cell {
         return mState;
     }
 
-    public Boolean OnClick(boolean isFlagged,int howManyMinesAround) {
+    public void setStateToCovered() {
+        setState(State.COVERED);
+    }
+
+    public void setState(State state) {
+        this.mState = state;
+    }
+
+    public Boolean OnClick(boolean isFlagged, int howManyMinesAround) {
         if (isFlagged) {
-            ToggleFlage();
+            ToggleFlag();
             return null;
         }
-        if(this.mState==State.UNCOVERED){
+        if (this.mState == State.UNCOVERED) {
             switch ((howManyMinesAround)) {
                 case 0:
-                setStateToCovered();
-               
+                    setStateToCovered();
+
                 case 1:
                     setState(State.ONE);
-                    
+
                 case 2:
                     setState(State.TWO);
-                   
+
                 case 3:
                     setState(State.THREE);
-                   
+
                 case 4:
                     setState(State.FOUR);
 
@@ -70,17 +79,10 @@ public class Cell {
         return null;
     }
 
-    public void ToggleFlage(){
-        if (this.mState==State.UNCOVERED)
-            this.mState=State.FLAGGED;
-        else if(this.mState==State.FLAGGED)
-            this.mState=State.UNCOVERED;
+    public void ToggleFlag() {
+        if (this.mState == State.UNCOVERED)
+            setState(State.FLAGGED);
+        else if (this.mState == State.FLAGGED)
+            setState(State.UNCOVERED);
     }
-    public void setStateToCovered(){
-        this.mState=State.COVERED;
-    }
-    public void setState(State state){
-        this.mState=state;
-    }
-
 }

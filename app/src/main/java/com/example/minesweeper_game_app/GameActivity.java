@@ -1,14 +1,13 @@
 package com.example.minesweeper_game_app;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.TextView;
 
-import com.example.minesweeper_game_app.logic.Cell;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.minesweeper_game_app.logic.CellAdapter;
 import com.example.minesweeper_game_app.logic.Game;
 
@@ -22,11 +21,12 @@ public class GameActivity extends AppCompatActivity {
     CellAdapter mCellAdapter;
     TextView mPlayerTurnTextView;
     int boardSize;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-        boardSize=getIntent().getIntExtra("BOARD_SIZE",0);
+        boardSize = getIntent().getIntExtra("BOARD_SIZE", 0);
         mGame = new Game(boardSize);
 
         mGridView = findViewById(gridView);

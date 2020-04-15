@@ -18,6 +18,7 @@ public class CellAdapter extends BaseAdapter {
         this.mBoard = board;
         this.mContext = context;
     }
+
     @Override
     public int getCount() {
         Log.d(TAG, "Count returned " + mBoard.getBoardSize());
@@ -40,8 +41,8 @@ public class CellAdapter extends BaseAdapter {
 
         CellView cellView;
 
-        cellView = (CellView)convertView;
-        if(cellView == null) {
+        cellView = (CellView) convertView;
+        if (cellView == null) {
             Log.d(TAG, "View created " + position);
             cellView = new CellView(mContext);
         }
