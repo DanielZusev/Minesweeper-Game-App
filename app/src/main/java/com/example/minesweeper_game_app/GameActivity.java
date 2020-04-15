@@ -1,7 +1,5 @@
 package com.example.minesweeper_game_app;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.View;
@@ -10,7 +8,8 @@ import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.minesweeper_game_app.logic.CellAdapter;
 import com.example.minesweeper_game_app.logic.Game;
@@ -23,7 +22,6 @@ public class GameActivity extends AppCompatActivity {
     Button restartButton;
     ImageView flagButton;
     CellAdapter mCellAdapter;
-    TextView mPlayerTurnTextView;
     Chronometer timer;
 
     int boardSize;
@@ -40,7 +38,7 @@ public class GameActivity extends AppCompatActivity {
 
         mGridView = findViewById(R.id.gridView);
         restartButton = findViewById(R.id.restart_button);
-        flagButton = (ImageView) findViewById(R.id.flag_button);
+        flagButton = findViewById(R.id.flag_button);
 
         mGridView.setNumColumns(boardSize);
         mCellAdapter = new CellAdapter(this, mGame.getmBoard());
@@ -52,7 +50,7 @@ public class GameActivity extends AppCompatActivity {
         restartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //mGame.getmBoard().CreateNewBoard(boardSize);
+                mGame.getmBoard().CreateNewBoard();
                 timer.setBase(SystemClock.elapsedRealtime());
                 timer.start();
             }

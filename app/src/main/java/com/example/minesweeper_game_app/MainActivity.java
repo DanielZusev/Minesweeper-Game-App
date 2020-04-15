@@ -1,8 +1,6 @@
 package com.example.minesweeper_game_app;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -20,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        button = (Button) findViewById(R.id.start_button);
+        button = findViewById(R.id.start_button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -29,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
     }
 
     public void openGameActivity(int boardSize) {
@@ -39,17 +38,23 @@ public class MainActivity extends AppCompatActivity {
 
     public void CHOOSE_EASY(View v) {
         choose = EASY;
-        v.setBackgroundColor(Color.GRAY);
+        v.setBackground(getDrawable(R.drawable.easy_button_shape_pressed));
+        findViewById(R.id.hard_button).setBackground(getDrawable(R.drawable.hard_button_shape));
+        findViewById(R.id.extreme_button).setBackground(getDrawable(R.drawable.extreme_button_shape));
 
     }
 
     public void CHOOSE_HARD(View v) {
         choose = HARD;
-        v.setBackgroundColor(Color.GRAY);
+        v.setBackground(getDrawable(R.drawable.hard_button_shape_pressed));
+        findViewById(R.id.easy_button).setBackground(getDrawable(R.drawable.easy_button_shape));
+        findViewById(R.id.extreme_button).setBackground(getDrawable(R.drawable.extreme_button_shape));
     }
 
     public void CHOOSE_EXTREME(View v) {
         choose = EXTREME;
-        v.setBackgroundColor(Color.GRAY);
+        v.setBackground(getDrawable(R.drawable.extreme_button_shape_pressed));
+        findViewById(R.id.hard_button).setBackground(getDrawable(R.drawable.hard_button_shape));
+        findViewById(R.id.easy_button).setBackground(getDrawable(R.drawable.easy_button_shape));
     }
 }
