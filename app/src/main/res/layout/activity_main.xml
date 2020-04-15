@@ -1,59 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="bottom"
     android:layout_gravity="bottom"
-    android:padding="25dp">
+    android:padding="25dp"
+    android:background="@drawable/images">
 
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:src="@drawable/main_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/main_image" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:orientation="horizontal"
         android:layout_gravity="bottom"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/easy_button"
+            style="@style/AppTheme"
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:background="@drawable/easy_button_shape"
+            android:onClick="CHOOSE_EASY"
             android:text="@string/difficulty_Easy"
             android:textColor="#7A6060"
-            android:textSize="12sp"
-            style="@style/AppTheme"
-            android:onClick="CHOOSE_EASY">
+            android:textSize="12sp"> <!--TODO method name need to be changed-->
         </Button>
 
         <Button
             android:id="@+id/hard_button"
+            style="@style/AppTheme"
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
+            android:layout_margin="5dp"
             android:background="@drawable/hard_button_shape"
+            android:onClick="CHOOSE_HARD"
             android:text="@string/difficulty_Hard"
             android:textColor="#7A6060"
-            android:textSize="12sp"
-            android:layout_margin="5dp"
-            style="@style/AppTheme"
-            android:onClick="CHOOSE_HARD">
+            android:textSize="12sp"> <!--TODO method name need to be changed-->
         </Button>
 
         <Button
             android:id="@+id/extreme_button"
+            style="@style/AppTheme"
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:background="@drawable/extreme_button_shape"
+            android:onClick="CHOOSE_EXTREME"
             android:text="@string/difficulty_Extreme"
             android:textColor="#7A6060"
-            android:textSize="12sp"
-            style="@style/AppTheme"
-            android:onClick="CHOOSE_EXTREME">
+            android:textSize="12sp"> <!--TODO method name need to be changed-->
         </Button>
     </LinearLayout>
 

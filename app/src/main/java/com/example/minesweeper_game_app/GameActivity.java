@@ -27,6 +27,7 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         boardSize = getIntent().getIntExtra("BOARD_SIZE", 0);
+
         mGame = new Game(boardSize);
 
         mGridView = findViewById(gridView);

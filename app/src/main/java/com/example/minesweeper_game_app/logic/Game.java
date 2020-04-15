@@ -1,6 +1,7 @@
 package com.example.minesweeper_game_app.logic;
 
 
+
 public class Game {
 
     private Board mBoard;
@@ -12,18 +13,6 @@ public class Game {
         setBoardSize(boardSize);
         this.mBoard = new Board(this.boardSize);
         this.isFlagged = false;
-    }
-
-    public Board getmBoard() {
-        return this.mBoard;
-    }
-
-    public int getBoardSize() {
-        return this.boardSize;
-    }
-
-    public void setBoardSize(int boardSize) {
-        this.boardSize = boardSize;
     }
 
     public void OnClick(int pos) {
@@ -51,5 +40,22 @@ public class Game {
     public void GameOver() {
         //TODO GameOver logic
     }
+
+    public Board getmBoard() {
+        return this.mBoard;
+    }
+
+    public int getBoardSize() {
+        return this.boardSize;
+    }
+
+    public boolean isFlagged() {
+        return isFlagged;
+    }
+
+    public void setBoardSize(int boardSize) {
+        this.boardSize = boardSize;
+    }
+
 
 }
