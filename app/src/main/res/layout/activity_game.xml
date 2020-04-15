@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,39 +13,40 @@
         android:orientation="vertical"
         >
 
-        <TextView
-            android:id="@+id/playerTurnTextView"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:textAlignment="center"
-            android:gravity="center_vertical"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:layout_weight="1"
-            android:text=" "
-            tools:ignore="RtlCompat" />
+        <Chronometer
+            android:id="@+id/chronometer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30sp" />
 
         <GridView
             android:id="@+id/gridView"
-            android:columnWidth="60dp"
-            android:verticalSpacing="1dp"
-            android:horizontalSpacing="1dp"
-            android:background="@color/colorGridBackground"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_weight="10" />
+            android:layout_height="571dp"
+            android:layout_weight="10"
+            android:background="@color/colorGridBackground"
+            android:columnWidth="2dp"
+            android:horizontalSpacing="0dp"
+            android:verticalSpacing="2dp" >
 
-        <ProgressBar
-            android:id="@+id/progressCircle"
+
+        </GridView>
+        <ImageView
+            android:id="@+id/flag_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/flagged" />
+        <Button
+            android:id="@+id/restart_button"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
             android:layout_gravity="center_horizontal"
-            android:indeterminate="true"
-            android:layout_weight="1"
-            android:visibility="invisible"
-            />
-
-
+            android:gravity="center"
+            android:text="@string/new_game"
+            android:background="@drawable/start_button_shape"
+            > <!--TODO method name need to be changed-->
+        </Button>
     </LinearLayout>
 
 </RelativeLayout>
