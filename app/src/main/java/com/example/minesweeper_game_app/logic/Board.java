@@ -4,21 +4,30 @@ import java.util.Random;
 
 public class Board {
     private Cell[] mCells;
+    private int mSize;
 
     public Board(int mSize) {
-        this.mCells = new Cell[mSize * mSize];
-        CreateNewBoard(mSize);
+
+        setmSize(mSize);
+        this.mCells = new Cell[this.mSize * this.mSize];
+        CreateNewBoard();
     }
 
-    public void CreateNewBoard(int mSize) {
+    public void setmSize(int mSize) {
+        this.mSize = mSize;
+    }
+
+    public void CreateNewBoard() {
         //create cells
-        for (int i = 0; i < mSize * mSize; i++)
+        for (int i = 0; i < this.mSize * this.mSize; i++)
             this.mCells[i] = new Cell();
         //put mines at random positions
         Random r = new Random();
         int minePos;
-        for (int i = 0; i < mSize; i++) {
-            minePos = r.nextInt(mSize);
+
+        for (int i = 0; i < this.mSize * 2; i++) {
+            minePos = r.nextInt(this.mSize * this.mSize);
+
             if (mCells[minePos].isMined())
                 i--;
             else
@@ -36,17 +45,32 @@ public class Board {
         return isMined;
     }
 
-    private void OnClickAround(int pos) {
-        //TODO check the pos and do OnClick  pos logic - only the cells around
-        OnClick(pos + 1, false);
-        OnClick(pos - 1, false);
-        OnClick(pos + 1 + this.mCells.length, false);
-        OnClick(pos + this.mCells.length, false);
-        OnClick(pos - this.mCells.length, false);
-        OnClick(pos + 1 - this.mCells.length, false);
-        OnClick(pos - 1 - this.mCells.length, false);
-        OnClick(pos - 1 + this.mCells.length, false);
 
+    private void OnClickAround(int pos) {
+        if (isCellValid(pos + 1)) {
+            OnClick(pos + 1, false);
+        }
+        if (isCellValid(pos - 1)) {
+            OnClick(pos - 1, false);
+        }
+        if (isCellValid(pos + 1 + this.mSize)) {
+            OnClick(pos + 1 + this.mSize, false);
+        }
+        if (isCellValid(pos + this.mSize)) {
+            OnClick(pos + this.mSize, false);
+        }
+        if (isCellValid(pos - this.mSize)) {
+            OnClick(pos - this.mSize, false);
+        }
+        if (isCellValid(pos + 1 - this.mSize)) {
+            OnClick(pos + 1 - this.mSize, false);
+        }
+        if (isCellValid(pos - 1 - this.mSize)) {
+            OnClick(pos - 1 - this.mSize, false);
+        }
+        if (isCellValid(pos - 1 + this.mSize)) {
+            OnClick(pos - 1 + this.mSize, false);
+        }
     }
 
     public int getBoardSize() {
@@ -58,26 +82,31 @@ public class Board {
     }
 
     private int CheckHowManyMinesAround(int pos) {
-        //TODO pos logic - only the cells around
         int minesCount = 0;
-        int boardSize = mCells.length;
-        //cell at first col
-        if (mCells[pos + 1].isMined())
+
+        if (mCells[pos + 1].isMined() && isCellValid(pos + 1))
             minesCount++;
-        if (mCells[pos + boardSize].isMined())
+        if (mCells[pos - 1].isMined() && isCellValid(pos - 1))
             minesCount++;
-        if (mCells[pos + boardSize + 1].isMined())
+        if (mCells[pos + 1 + this.mSize].isMined() && isCellValid(pos + 1 + this.mSize))
             minesCount++;
-        if (mCells[pos - 1].isMined())
+        if (mCells[pos + this.mSize].isMined() && isCellValid(pos + this.mSize))
             minesCount++;
-        if (mCells[pos - boardSize].isMined())
+        if (mCells[pos - this.mSize].isMined() && isCellValid(pos - this.mSize))
             minesCount++;
-        if (mCells[pos - boardSize - 1].isMined())
+        if (mCells[pos + 1 - this.mSize].isMined() && isCellValid(pos + 1 - this.mSize))
             minesCount++;
-        if (mCells[pos - boardSize + 1].isMined())
+        if (mCells[pos - 1 - this.mSize].isMined() && isCellValid(pos - 1 - this.mSize))
             minesCount++;
-        if (mCells[pos + boardSize - 1].isMined())
+        if (mCells[pos - 1 + this.mSize].isMined() && isCellValid(pos - 1 + this.mSize))
             minesCount++;
+
         return minesCount;
+    }
+
+    public boolean isCellValid(int pos) {
+        int row = pos / this.mSize;
+        int col = pos % this.mSize;
+        return (row >= 0) && (row < this.mSize) && (col >= 0) && (col < this.mSize);
     }
 }
