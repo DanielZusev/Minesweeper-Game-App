@@ -57,15 +57,21 @@ public class GameActivity extends AppCompatActivity {
                 mCellAdapter.notifyDataSetChanged();
             }
         });
-        
+
         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Boolean clickValue = mGame.OnClick(position);
+                boolean dirty = false;
+                if (clickValue == null) {
 
-                mGame.OnClick(position);
+                } else if (clickValue) {
+                    openEndActivity(false);
+                }
+
                 mCellAdapter.notifyDataSetChanged();
                 if (mGame.cellsToWinCount == 0) {
-                    openEndActivity(mGame.end);
+                    openEndActivity(true);
                 }
             }
         });

@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:gravity="bottom"
     android:layout_gravity="bottom"
-    android:paddingBottom="25dp"
-    >
+    android:paddingBottom="25dp">
 
     <ImageView
         android:id="@+id/end_screen_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:contentDescription="@string/game_status">
+        app:srcCompat="@drawable/flagged"
+        android:layout_gravity="center"
+       >
 
     </ImageView>
 

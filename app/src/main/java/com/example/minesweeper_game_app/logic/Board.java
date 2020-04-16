@@ -25,7 +25,7 @@ public class Board {
         Random r = new Random();
         int minePos;
 
-        for (int i = 0; i < 1 ; i++) {
+        for (int i = 0; i < 5 ; i++) {
             minePos = r.nextInt(this.mSize * this.mSize);
 
             if (mCells[minePos].isMined())
@@ -36,6 +36,8 @@ public class Board {
     }
 
     public Boolean OnClick(int pos, boolean isFlagged) {
+        if(this.mCells[pos].getmState()!= Cell.State.UNCOVERED)
+            return null;
         int minesAround = CheckHowManyMinesAround(pos);
 
         Boolean isMined = mCells[pos].OnClick(isFlagged, minesAround);

@@ -8,7 +8,7 @@ public class Game {
 
     private boolean isFlagged;
     private int boardSize;
-    public Boolean end;
+
 
     public int cellsToWinCount;
 
@@ -17,37 +17,29 @@ public class Game {
         this.mBoard = new Board(boardSize);
         this.cellsToWinCount = this.boardSize * this.boardSize;
         this.isFlagged = false;
-        this.end = null;
 
     }
 
-    public void OnClick(int pos) {
+    public Boolean OnClick(int pos) {
         Boolean clickValue = mBoard.OnClick(pos, isFlagged);
         if(clickValue==null)
-            return;
+            return null;
         //click on mine
         else if (clickValue)
-            GameOver();
+            return true;
             //click on UNCOVERED cell
         else {
             cellsToWinCount--;
             if (cellsToWinCount == 0)
-                Victory();
+                return false;
         }
+        return null;
     }
 
     public void ToggleFlagged() {
         if (this.isFlagged)
             this.isFlagged = false;
         else this.isFlagged = true;
-    }
-
-    private void Victory() {
-        this.end = true;
-    }
-
-    public void GameOver() {
-        this.end = false;
     }
 
     public Board getmBoard() {

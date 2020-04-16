@@ -49,6 +49,7 @@ public class CellView extends LinearLayout {
                 mImageView.setImageResource(R.drawable.three);
                 break;
             case FOUR:
+
                 mImageView.setImageResource(R.drawable.four);
                 break;
             case MINE:

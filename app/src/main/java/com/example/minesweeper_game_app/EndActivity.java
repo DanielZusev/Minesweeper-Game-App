@@ -24,10 +24,9 @@ public class EndActivity extends AppCompatActivity {
     }
 
     public void setVictory(){
-        imageView.setImageDrawable(getDrawable(R.drawable.victory));
+        imageView.setImageResource(R.drawable.victory);
     }
 
     public void setGameOver(){
-        imageView.setImageDrawable(getDrawable(R.drawable.game_over));
-    }
+        imageView.setImageResource(R.drawable.game_over);}
 }
