@@ -25,7 +25,7 @@ public class Board {
         Random r = new Random();
         int minePos;
 
-        for (int i = 0; i < this.mSize ; i++) {
+        for (int i = 0; i < 1 ; i++) {
             minePos = r.nextInt(this.mSize * this.mSize);
 
             if (mCells[minePos].isMined())
@@ -44,33 +44,34 @@ public class Board {
         if (!isMined && minesAround == 0) {
             OnClickAround(pos);
         }
+
         return isMined;
     }
 
 
     private void OnClickAround(int pos) {
-        if (isCellValid(pos + 1)) {
+        if (isCellValid(pos,pos + 1)) {
             OnClick(pos + 1, false);
         }
-        if (isCellValid(pos - 1)) {
+        if (isCellValid(pos,pos - 1)) {
             OnClick(pos - 1, false);
         }
-        if (isCellValid(pos + 1 + this.mSize)) {
+        if (isCellValid(pos,pos + 1 + this.mSize)) {
             OnClick(pos + 1 + this.mSize, false);
         }
-        if (isCellValid(pos + this.mSize)) {
+        if (isCellValid(pos,pos + this.mSize)) {
             OnClick(pos + this.mSize, false);
         }
-        if (isCellValid(pos - this.mSize)) {
+        if (isCellValid(pos,pos - this.mSize)) {
             OnClick(pos - this.mSize, false);
         }
-        if (isCellValid(pos + 1 - this.mSize)) {
+        if (isCellValid(pos,pos + 1 - this.mSize)) {
             OnClick(pos + 1 - this.mSize, false);
         }
-        if (isCellValid(pos - 1 - this.mSize)) {
+        if (isCellValid(pos,pos - 1 - this.mSize)) {
             OnClick(pos - 1 - this.mSize, false);
         }
-        if (isCellValid(pos - 1 + this.mSize)) {
+        if (isCellValid(pos,pos - 1 + this.mSize)) {
             OnClick(pos - 1 + this.mSize, false);
         }
     }
@@ -86,29 +87,56 @@ public class Board {
     private int CheckHowManyMinesAround(int pos) {
         int minesCount = 0;
 
-        if ( isCellValid(pos + 1)&&mCells[pos + 1].isMined() )
-            minesCount++;
-        if (isCellValid(pos - 1)&&mCells[pos - 1].isMined()  )
-            minesCount++;
-        if (isCellValid(pos + 1 + this.mSize)&&mCells[pos + 1 + this.mSize].isMined() )
-            minesCount++;
-        if (isCellValid(pos + this.mSize)&&mCells[pos + this.mSize].isMined() )
-            minesCount++;
-        if ( isCellValid(pos - this.mSize)&&mCells[pos - this.mSize].isMined())
-            minesCount++;
-        if (isCellValid(pos + 1 - this.mSize)&&mCells[pos + 1 - this.mSize].isMined() )
-            minesCount++;
-        if (  isCellValid(pos - 1 - this.mSize)&&mCells[pos - 1 - this.mSize].isMined())
-            minesCount++;
-        if ( isCellValid(pos - 1 + this.mSize)&&mCells[pos - 1 + this.mSize].isMined() )
-            minesCount++;
+        if (isCellValid(pos, pos + 1))
+            if (mCells[pos + 1].isMined())
+                minesCount++;
+        if (isCellValid(pos, pos - 1))
+            if (mCells[pos - 1].isMined())
+                minesCount++;
+        if (isCellValid(pos, pos + 1 + this.mSize))
+            if (mCells[pos + 1 + this.mSize].isMined())
+                minesCount++;
+        if (isCellValid(pos, pos + this.mSize))
+            if (mCells[pos + this.mSize].isMined())
+                minesCount++;
+        if (isCellValid(pos, pos - this.mSize))
+            if (mCells[pos - this.mSize].isMined())
+                minesCount++;
+        if (isCellValid(pos, pos + 1 - this.mSize))
+            if (mCells[pos + 1 - this.mSize].isMined())
+                minesCount++;
+        if (isCellValid(pos, pos - 1 - this.mSize))
+            if (mCells[pos - 1 - this.mSize].isMined())
+                minesCount++;
+        if (isCellValid(pos, pos - 1 + this.mSize))
+            if (mCells[pos - 1 + this.mSize].isMined())
+                minesCount++;
 
         return minesCount;
     }
 
-    public boolean isCellValid(int pos) {
+    public boolean isCellValid(int pos, int nextPos) {
+
         int row = pos / this.mSize;
         int col = pos % this.mSize;
-        return (row >= 0) && (row < this.mSize) && (col >= 0) && (col < this.mSize);
+        int newRow = nextPos / this.mSize;
+        int newCol = nextPos % this.mSize;
+
+        if (nextPos < 0 || nextPos >= this.mCells.length){
+            return false;
+        }
+        if(newRow < 0 || newRow >= this.mSize){
+            return false;
+        }
+        if (newCol < 0 || newCol >= this.mSize){
+            return false;
+        }
+        if (col == this.mSize - 1 && newCol == 0){
+            return false;
+        }
+        if (col == 0 && newCol == this.mSize - 1){
+            return false;
+        }
+        return true;
     }
 }

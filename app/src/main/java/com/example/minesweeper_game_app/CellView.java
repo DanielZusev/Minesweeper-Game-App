@@ -1,8 +1,6 @@
 package com.example.minesweeper_game_app;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -52,6 +50,9 @@ public class CellView extends LinearLayout {
                 break;
             case FOUR:
                 mImageView.setImageResource(R.drawable.four);
+                break;
+            case MINE:
+                mImageView.setImageResource(R.drawable.bomb);
                 break;
         }
     }

@@ -3,7 +3,7 @@ package com.example.minesweeper_game_app.logic;
 public class Cell {
 
     public enum State {
-        UNCOVERED, COVERED, FLAGGED, ONE, TWO, THREE, FOUR;
+        UNCOVERED, COVERED, FLAGGED, ONE, TWO, THREE, FOUR, MINE
     }
 
     private State mState;
@@ -28,8 +28,11 @@ public class Cell {
 
     public Boolean OnClick(boolean isFlagged, int howManyMinesAround) {
         if (isFlagged) {
-            ToggleFlage();
+            ToggleFlag();
             return null;
+        }
+        if (isMined()){
+            setState(State.MINE);
         }
         else if (this.mState == State.UNCOVERED) {
             switch ((howManyMinesAround)) {
@@ -49,16 +52,12 @@ public class Cell {
                     setState(State.FOUR);
 
                     break;
-                default:
-                   // throw new IllegalStateException("Unexpected value: " + (howManyMinesAround));
-
             }
-            return this.isMined;
         }
-        return null;
+        return this.isMined;
     }
 
-    public void ToggleFlage() {
+    public void ToggleFlag() {
         if (this.mState == State.UNCOVERED)
             this.mState = State.FLAGGED;
         else if (this.mState == State.FLAGGED)

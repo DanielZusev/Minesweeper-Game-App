@@ -1,5 +1,6 @@
 package com.example.minesweeper_game_app;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.View;
@@ -56,14 +57,16 @@ public class GameActivity extends AppCompatActivity {
                 mCellAdapter.notifyDataSetChanged();
             }
         });
-
+        
         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 mGame.OnClick(position);
                 mCellAdapter.notifyDataSetChanged();
-
+                if (mGame.cellsToWinCount == 0) {
+                    openEndActivity(mGame.end);
+                }
             }
         });
         flagButton.setOnClickListener(new View.OnClickListener() {
@@ -76,5 +79,11 @@ public class GameActivity extends AppCompatActivity {
                     flagButton.setImageResource(R.drawable.flagged);
             }
         });
+    }
+
+    public void openEndActivity(Boolean endStatus) {
+        Intent intent = new Intent(this, EndActivity.class);
+        intent.putExtra("END_STATUS", endStatus);
+        startActivity(intent);
     }
 }

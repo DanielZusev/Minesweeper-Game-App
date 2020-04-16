@@ -8,21 +8,24 @@
     android:gravity="bottom"
     android:layout_gravity="bottom"
     android:padding="25dp"
-    android:background="@drawable/images">
+    android:background="@drawable/main_new"
+    >
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        >
 
         <ImageView
             android:id="@+id/imageView"
-            android:src="@drawable/main_image"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/main_image" />
+            android:src="@drawable/new_logo"
+            android:layout_width="550dp"
+            android:layout_height="550dp"
+            app:srcCompat="@drawable/main_new"
+            />
     </LinearLayout>
 
     <LinearLayout
@@ -42,7 +45,7 @@
             android:onClick="CHOOSE_EASY"
             android:text="@string/difficulty_Easy"
             android:textColor="#7A6060"
-            android:textSize="12sp"> <!--TODO method name need to be changed-->
+            android:textSize="12sp">
         </Button>
 
         <Button
@@ -56,7 +59,7 @@
             android:onClick="CHOOSE_HARD"
             android:text="@string/difficulty_Hard"
             android:textColor="#7A6060"
-            android:textSize="12sp"> <!--TODO method name need to be changed-->
+            android:textSize="12sp">
         </Button>
 
         <Button
@@ -69,7 +72,7 @@
             android:onClick="CHOOSE_EXTREME"
             android:text="@string/difficulty_Extreme"
             android:textColor="#7A6060"
-            android:textSize="12sp"> <!--TODO method name need to be changed-->
+            android:textSize="12sp">
         </Button>
     </LinearLayout>
 
@@ -81,7 +84,7 @@
         android:gravity="center"
         android:text="@string/start_button"
         android:background="@drawable/start_button_shape"
-        > <!--TODO method name need to be changed-->
+        >
     </Button>
 
 </LinearLayout>

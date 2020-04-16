@@ -1,20 +1,23 @@
 package com.example.minesweeper_game_app.logic;
 
+
+
 public class Game {
     private Board mBoard;
 
 
     private boolean isFlagged;
     private int boardSize;
+    public Boolean end;
 
     public int cellsToWinCount;
 
     public Game(int boardSize) {
         this.boardSize=boardSize;
         this.mBoard = new Board(boardSize);
-
+        this.cellsToWinCount = this.boardSize * this.boardSize;
         this.isFlagged = false;
-
+        this.end = null;
 
     }
 
@@ -31,7 +34,6 @@ public class Game {
             if (cellsToWinCount == 0)
                 Victory();
         }
-
     }
 
     public void ToggleFlagged() {
@@ -41,11 +43,11 @@ public class Game {
     }
 
     private void Victory() {
-        //TODO victory logic
+        this.end = true;
     }
 
     public void GameOver() {
-        //TODO GameOver logic
+        this.end = false;
     }
 
     public Board getmBoard() {
@@ -55,6 +57,5 @@ public class Game {
     public boolean isFlagged() {
         return isFlagged;
     }
-
 
 }
