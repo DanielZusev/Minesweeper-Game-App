@@ -35,7 +35,7 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
 
         boardSize = getIntent().getIntExtra("BOARD_SIZE", 0);
-        mGame = new Game(boardSize);
+        mGame = new Game(boardSize,boardSize);
 
         mGridView = findViewById(R.id.gridView);
         restartButton = findViewById(R.id.restart_button);
@@ -51,7 +51,7 @@ public class GameActivity extends AppCompatActivity {
         restartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mGame.getmBoard().CreateNewBoard();
+                mGame.getmBoard().CreateNewBoard(boardSize);
                 timer.setBase(SystemClock.elapsedRealtime());
                 timer.start();
                 mCellAdapter.notifyDataSetChanged();
@@ -63,14 +63,13 @@ public class GameActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Boolean clickValue = mGame.OnClick(position);
                 boolean dirty = false;
+                mCellAdapter.notifyDataSetChanged();
                 if (clickValue == null) {
 
                 } else if (clickValue) {
                     openEndActivity(false);
                 }
-
-                mCellAdapter.notifyDataSetChanged();
-                if (mGame.cellsToWinCount == 0) {
+                else{
                     openEndActivity(true);
                 }
             }

@@ -10,12 +10,11 @@ public class Game {
     private int boardSize;
 
 
-    public int cellsToWinCount;
-
-    public Game(int boardSize) {
+    public Game(int boardSize,int numOfMines) {
         this.boardSize=boardSize;
-        this.mBoard = new Board(boardSize);
-        this.cellsToWinCount = this.boardSize * this.boardSize;
+
+        this.mBoard = new Board(boardSize,numOfMines);
+
         this.isFlagged = false;
 
     }
@@ -28,9 +27,8 @@ public class Game {
         else if (clickValue)
             return true;
             //click on UNCOVERED cell
-        else {
-            cellsToWinCount--;
-            if (cellsToWinCount == 0)
+        else{
+            if (mBoard.getCellsToWinCount() == 0)
                 return false;
         }
         return null;

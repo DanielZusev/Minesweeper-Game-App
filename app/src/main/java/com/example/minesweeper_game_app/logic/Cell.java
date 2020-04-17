@@ -31,7 +31,9 @@ public class Cell {
             ToggleFlag();
             return null;
         }
-        if (isMined()){
+        if(this.mState==State.FLAGGED)
+            return null;
+        if (this.isMined()){
             setState(State.MINE);
         }
         else if (this.mState == State.UNCOVERED) {

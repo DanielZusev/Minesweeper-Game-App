@@ -1,23 +1,27 @@
 package com.example.minesweeper_game_app.logic;
 
+import android.util.Log;
+
 import java.util.Random;
 
 public class Board {
     private Cell[] mCells;
     private int mSize;
+    private int cellsToWinCount;
 
-    public Board(int mSize) {
+    public Board(int mSize,int numOfMines) {
 
         setmSize(mSize);
+        this.cellsToWinCount = (this.mSize*this.mSize)-numOfMines ;
         this.mCells = new Cell[this.mSize * this.mSize];
-        CreateNewBoard();
+        CreateNewBoard(numOfMines);
     }
 
     public void setmSize(int mSize) {
         this.mSize = mSize;
     }
 
-    public void CreateNewBoard() {
+    public void CreateNewBoard(int numOfMines) {
         //create cells
         for (int i = 0; i < this.mSize * this.mSize; i++)
             this.mCells[i] = new Cell();
@@ -25,18 +29,20 @@ public class Board {
         Random r = new Random();
         int minePos;
 
-        for (int i = 0; i < 5 ; i++) {
+        for (int i = 0; i < numOfMines; i++) {
             minePos = r.nextInt(this.mSize * this.mSize);
 
             if (mCells[minePos].isMined())
                 i--;
-            else
+            else {
                 mCells[minePos].setMined(true);
+                Log.e("myTag", ","+minePos);
+            }
         }
     }
 
     public Boolean OnClick(int pos, boolean isFlagged) {
-        if(this.mCells[pos].getmState()!= Cell.State.UNCOVERED)
+        if(this.mCells[pos].getmState()!= Cell.State.UNCOVERED&&this.mCells[pos].getmState()!= Cell.State.FLAGGED)
             return null;
         int minesAround = CheckHowManyMinesAround(pos);
 
@@ -46,7 +52,7 @@ public class Board {
         if (!isMined && minesAround == 0) {
             OnClickAround(pos);
         }
-
+        this.cellsToWinCount--;
         return isMined;
     }
 
@@ -79,7 +85,7 @@ public class Board {
     }
 
     public int getBoardSize() {
-        return this.mCells.length;
+        return this.mSize*this.mSize;
     }
 
     public Cell getCell(int pos) {
@@ -140,5 +146,13 @@ public class Board {
             return false;
         }
         return true;
+    }
+
+    public int getCellsToWinCount() {
+        return cellsToWinCount;
+    }
+
+    public void setCellsToWinCount(int cellsToWinCount) {
+        this.cellsToWinCount = cellsToWinCount;
     }
 }
