@@ -46,5 +46,12 @@ public class EndActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, GameActivity.class);
+        intent.putExtra("BOARD_SIZE", boardSize);
+        startActivity(intent);
+    }
+
 }
 
