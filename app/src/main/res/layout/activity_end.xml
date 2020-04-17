@@ -11,12 +11,8 @@
     <ImageView
         android:id="@+id/end_screen_image"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:srcCompat="@drawable/flagged"
-        android:layout_gravity="center"
-       >
-
-    </ImageView>
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/eight" />
 
 
     <LinearLayout

@@ -14,7 +14,7 @@ public class EndActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_end);
-        imageView.findViewById(R.id.end_screen_image);
+        imageView=findViewById(R.id.end_screen_image);
         endStatus = getIntent().getBooleanExtra("END_STATUS", false);
 
         if (endStatus)
