@@ -67,10 +67,10 @@ public class GameActivity extends AppCompatActivity {
                 if (clickValue == null) {
 
                 } else if (clickValue) {
-                    openEndActivity(false);
+                    openEndActivity(false,boardSize);
                 }
                 else{
-                    openEndActivity(true);
+                    openEndActivity(true,boardSize);
                 }
             }
         });
@@ -86,9 +86,10 @@ public class GameActivity extends AppCompatActivity {
         });
     }
 
-    public void openEndActivity(Boolean endStatus) {
+    public void openEndActivity(Boolean endStatus, int boardSize) {
         Intent intent = new Intent(this, EndActivity.class);
         intent.putExtra("END_STATUS", endStatus);
+        intent.putExtra("BOARD_SIZE", boardSize);
         startActivity(intent);
     }
 }
