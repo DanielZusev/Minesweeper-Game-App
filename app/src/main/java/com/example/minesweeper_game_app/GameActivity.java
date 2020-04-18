@@ -35,7 +35,7 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
 
         boardSize = getIntent().getIntExtra("BOARD_SIZE", 0);
-        mGame = new Game(boardSize,boardSize);
+        mGame = new Game(boardSize, boardSize);
 
         mGridView = findViewById(R.id.gridView);
         restartButton = findViewById(R.id.restart_button);
@@ -64,13 +64,20 @@ public class GameActivity extends AppCompatActivity {
                 Boolean clickValue = mGame.OnClick(position);
                 boolean dirty = false;
                 mCellAdapter.notifyDataSetChanged();
-                if (clickValue == null) {
+                try {
+                    if (clickValue == null) {
 
-                } else if (clickValue) {
-                    openEndActivity(false,boardSize);
-                }
-                else{
-                    openEndActivity(true,boardSize);
+                    } else if (clickValue) {
+                        mGame.revealBoard();
+                        Thread.sleep(5000);
+                        openEndActivity(false, boardSize);
+                    } else {
+                        mGame.revealBoard();
+                        Thread.sleep(5000);
+                        openEndActivity(true, boardSize);
+                    }
+                } catch (InterruptedException aborted) {
+                    System.err.println(aborted);
                 }
             }
         });
@@ -91,5 +98,13 @@ public class GameActivity extends AppCompatActivity {
         intent.putExtra("END_STATUS", endStatus);
         intent.putExtra("BOARD_SIZE", boardSize);
         startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

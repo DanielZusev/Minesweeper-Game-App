@@ -152,7 +152,4 @@ public class Board {
         return cellsToWinCount;
     }
 
-    public void setCellsToWinCount(int cellsToWinCount) {
-        this.cellsToWinCount = cellsToWinCount;
-    }
 }

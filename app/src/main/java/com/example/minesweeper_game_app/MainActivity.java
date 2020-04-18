@@ -57,4 +57,10 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.hard_button).setBackground(getDrawable(R.drawable.hard_button_shape));
         findViewById(R.id.easy_button).setBackground(getDrawable(R.drawable.easy_button_shape));
     }
+
+    @Override
+    public void onBackPressed() {
+        finishAffinity();
+        System.exit(0);
+    }
 }

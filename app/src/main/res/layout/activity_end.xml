@@ -12,7 +12,8 @@
         android:id="@+id/end_screen_image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/eight" />
+        app:srcCompat="@drawable/eight"
+        android:contentDescription="@string/end_game_image"/>
 
 
     <LinearLayout
@@ -33,7 +34,9 @@
             android:background="@drawable/end_game_button_shape"
             android:gravity="center"
             android:text="@string/end_game_button"
-            android:onClick="endGame"></Button>
+            android:onClick="endGame">
+
+        </Button>
 
         <Button
             android:id="@+id/start_button"
@@ -43,7 +46,9 @@
             android:background="@drawable/start_button_shape"
             android:gravity="center"
             android:text="@string/start_button"
-            android:onClick="startNewGame"></Button>
+            android:onClick="startNewGame">
+
+        </Button>
 
     </LinearLayout>
 
