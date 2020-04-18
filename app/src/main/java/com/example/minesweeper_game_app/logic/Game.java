@@ -50,7 +50,7 @@ public class Game {
 
     public void revealBoard(){
         for (int i = 0; i < mBoard.getBoardSize(); i++) {
-            if (mBoard.getCell(i).isMined()&&mBoard.getCell(i).getmState()== Cell.State.UNCOVERED){
+            if (mBoard.getCell(i).isMined()&&mBoard.getCell(i).getmState()!= Cell.State.BOOM){
                 mBoard.getCell(i).setState(Cell.State.MINE);
             }
         }
