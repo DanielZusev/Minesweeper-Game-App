@@ -3,7 +3,7 @@ package com.example.minesweeper_game_app.logic;
 public class Cell {
 
     public enum State {
-        UNCOVERED, COVERED, FLAGGED, ONE, TWO, THREE, FOUR, MINE
+        UNCOVERED, COVERED, FLAGGED, ONE, TWO, THREE, FOUR,FIVE,SIX,SEVEN,EIGHT, MINE
     }
 
     private State mState;
@@ -52,7 +52,18 @@ public class Cell {
                     break;
                 case 4:
                     setState(State.FOUR);
-
+                    break;
+                case 5:
+                    setState(State.FIVE);
+                    break;
+                case 6:
+                    setState(State.SIX);
+                    break;
+                case 7:
+                    setState(State.SEVEN);
+                    break;
+                case 8:
+                    setState(State.EIGHT);
                     break;
             }
         }
