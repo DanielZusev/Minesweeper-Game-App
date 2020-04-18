@@ -17,13 +17,6 @@ public class CellView extends LinearLayout {
         mImageView = new ImageView(context);
         LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT);
-        /*mTextView.setLayoutParams(layoutParams);
-        mTextView.setTextAlignment(TEXT_ALIGNMENT_CENTER);
-        mTextView.setGravity(Gravity.CENTER);
-        mTextView.setTextSize(50);
-        mTextView.setTextColor(Color.WHITE);
-        setBackgroundColor(Color.DKGRAY);*/
-
         addView(mImageView);
 
     }
@@ -65,6 +58,9 @@ public class CellView extends LinearLayout {
                 break;
             case MINE:
                 mImageView.setImageResource(R.drawable.bomb);
+                break;
+            case BOOM:
+                mImageView.setImageResource(R.drawable.boom);
                 break;
         }
     }

@@ -15,6 +15,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.minesweeper_game_app.logic.CellAdapter;
 import com.example.minesweeper_game_app.logic.Game;
 
+import java.util.Random;
+
 public class GameActivity extends AppCompatActivity {
 
 
@@ -26,6 +28,26 @@ public class GameActivity extends AppCompatActivity {
     Chronometer timer;
 
     int boardSize;
+    Thread t = new Thread(new Runnable() {
+        @Override
+        public void run() {
+            mGame.revealBoard();
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+
+                    mCellAdapter.notifyDataSetChanged();
+                    try {
+
+                        Thread.sleep(  2500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+
+        }
+    });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,21 +86,17 @@ public class GameActivity extends AppCompatActivity {
                 Boolean clickValue = mGame.OnClick(position);
                 boolean dirty = false;
                 mCellAdapter.notifyDataSetChanged();
-                try {
-                    if (clickValue == null) {
 
+                    if (clickValue == null) {
+                        return;
                     } else if (clickValue) {
-                        mGame.revealBoard();
-                        Thread.sleep(5000);
+                        t.start();
                         openEndActivity(false, boardSize);
                     } else {
-                        mGame.revealBoard();
-                        Thread.sleep(5000);
+                        t.start();
                         openEndActivity(true, boardSize);
                     }
-                } catch (InterruptedException aborted) {
-                    System.err.println(aborted);
-                }
+
             }
         });
         flagButton.setOnClickListener(new View.OnClickListener() {

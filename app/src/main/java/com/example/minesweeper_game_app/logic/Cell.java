@@ -3,7 +3,7 @@ package com.example.minesweeper_game_app.logic;
 public class Cell {
 
     public enum State {
-        UNCOVERED, COVERED, FLAGGED, ONE, TWO, THREE, FOUR,FIVE,SIX,SEVEN,EIGHT, MINE
+        UNCOVERED, COVERED, FLAGGED, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, MINE, BOOM
     }
 
     private State mState;
@@ -31,12 +31,11 @@ public class Cell {
             ToggleFlag();
             return null;
         }
-        if(this.mState==State.FLAGGED)
+        if (this.mState == State.FLAGGED)
             return null;
-        if (this.isMined()){
-            setState(State.MINE);
-        }
-        else if (this.mState == State.UNCOVERED) {
+        if (this.isMined()) {
+            setState(State.BOOM);
+        } else if (this.mState == State.UNCOVERED) {
             switch ((howManyMinesAround)) {
                 case 0:
                     setStateToCovered();

@@ -48,13 +48,12 @@ public class Game {
         return isFlagged;
     }
 
-    public boolean revealBoard(){
+    public void revealBoard(){
         for (int i = 0; i < mBoard.getBoardSize(); i++) {
-            if (mBoard.getCell(i).isMined()){
+            if (mBoard.getCell(i).isMined()&&mBoard.getCell(i).getmState()== Cell.State.UNCOVERED){
                 mBoard.getCell(i).setState(Cell.State.MINE);
             }
         }
-        return true;
     }
 
 }
