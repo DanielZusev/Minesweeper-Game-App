@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Minesweeper-Game-App</string>
+    <string name="app_name">Minesweeper Game</string>
     <string name="difficulty_Easy">Easy</string>
     <string name="difficulty_Hard">Hard</string>
     <string name="difficulty_Extreme">Extreme</string>
@@ -8,4 +8,5 @@
     <string name="new_game">New Game</string>
     <string name="game_status">End Game Status</string>
     <string name="end_game_image">End Game Image</string>
+    <string name="flag_image">Flag Image</string>
 </resources>
