@@ -12,7 +12,6 @@ public class Board {
     public Board(int mSize,int numOfMines) {
 
         setmSize(mSize);
-        this.cellsToWinCount = (this.mSize*this.mSize)-numOfMines ;
         this.mCells = new Cell[this.mSize * this.mSize];
         CreateNewBoard(numOfMines);
     }
@@ -22,6 +21,7 @@ public class Board {
     }
 
     public void CreateNewBoard(int numOfMines) {
+        this.cellsToWinCount = (this.mSize*this.mSize)-numOfMines ;
         //create cells
         for (int i = 0; i < this.mSize * this.mSize; i++)
             this.mCells[i] = new Cell();
@@ -52,7 +52,8 @@ public class Board {
         if (!isMined && minesAround == 0) {
             OnClickAround(pos);
         }
-        this.cellsToWinCount--;
+        Log.e("myTag", ","+this.cellsToWinCount);
+         this.cellsToWinCount--;
         return isMined;
     }
 
