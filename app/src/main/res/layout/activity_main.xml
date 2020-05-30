@@ -25,10 +25,12 @@
             android:layout_width="550dp"
             android:layout_height="550dp"
             app:srcCompat="@drawable/main_new"
+            android:contentDescription="@string/main_logo_desc"
             />
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/difficulty_layout"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_gravity="bottom"

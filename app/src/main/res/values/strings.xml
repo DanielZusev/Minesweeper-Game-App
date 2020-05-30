@@ -9,4 +9,5 @@
     <string name="game_status">End Game Status</string>
     <string name="end_game_image">End Game Image</string>
     <string name="flag_image">Flag Image</string>
+    <string name="main_logo_desc">main logo of the game</string>
 </resources>

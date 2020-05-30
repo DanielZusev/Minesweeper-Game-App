@@ -1,6 +1,7 @@
 package com.example.minesweeper_game_app;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,16 +14,25 @@ public class MainActivity extends AppCompatActivity {
     private static final int HARD = 6;
     private static final int EXTREME = 7;
     private Integer choose = null;
+    private SharedPreferences difficulty;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         button = findViewById(R.id.start_button);
+        this.difficulty = getSharedPreferences("DB", MODE_PRIVATE);
+        if (difficulty.getBoolean("FirstStart",false)) {
+            onStartLevel();
+        }
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (choose != null) {
+                    SharedPreferences.Editor editor = difficulty.edit();
+                    editor.putInt("level",choose);
+                    editor.putBoolean("FirstStart", true);
+                    editor.apply();
                     openGameActivity(choose);
                 }
             }
@@ -62,5 +72,16 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
         finishAffinity();
         System.exit(0);
+    }
+
+    public void onStartLevel(){
+        SharedPreferences difficulty = getSharedPreferences("DB",MODE_PRIVATE);
+        choose = difficulty.getInt("level",5);
+        View view;
+        switch (choose){
+            case EASY: view = findViewById(R.id.easy_button); CHOOSE_EASY(view); break;
+            case HARD: view = findViewById(R.id.hard_button); CHOOSE_HARD(view); break;
+            case EXTREME: view = findViewById(R.id.extreme_button); CHOOSE_EXTREME(view); break;
+        }
     }
 }
