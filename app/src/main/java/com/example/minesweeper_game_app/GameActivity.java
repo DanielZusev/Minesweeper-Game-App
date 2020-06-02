@@ -1,8 +1,13 @@
 package com.example.minesweeper_game_app;
 
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.os.SystemClock;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -17,8 +22,11 @@ import com.example.minesweeper_game_app.logic.Game;
 
 import java.util.Random;
 
-public class GameActivity extends AppCompatActivity {
+public class GameActivity extends AppCompatActivity  implements  SensorServiceListener{
 
+
+    SensorsService.SensorServiceBinder mBinder;
+    boolean isBound = false;
 
     Game mGame;
     GridView mGridView;
@@ -125,4 +133,70 @@ public class GameActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if(isBound) {
+            mBinder.startSensors();
+        }
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if(isBound) {
+            mBinder.stopSensors();
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Intent intent = new Intent(this, SensorsService.class);
+        Log.d("On start", "binding to service...");
+        bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        if (isBound) {
+            unbindService(mConnection);
+            isBound = false;
+        }
+
+    }
+
+    private ServiceConnection mConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            Log.d("Service Connection", "bound to service");
+            mBinder = (SensorsService.SensorServiceBinder) service;
+            mBinder.registerListener(GameActivity.this);
+            Log.d("Service Connection", "registered as listener");
+            isBound = true;
+            mBinder.startSensors();
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+
+            isBound = false;
+        }
+    };
+
+
+    @Override
+    public void alarmStateChanged(ALARM_STATE state) {
+        Log.d("ACTIVITY", "STATE: " + state);
+    }
+
+
+
+
 }
