@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:testOnly="false"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        >
         <activity android:name=".GameActivity"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -19,6 +20,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".EndActivity" />
+        <service android:name=".SensorsService" />
+
     </application>
 
 </manifest>
