@@ -21,7 +21,7 @@ public class Board {
     }
 
     public void CreateNewBoard(int numOfMines) {
-        this.cellsToWinCount = 2;//(this.mSize*this.mSize)-numOfMines ;
+        this.cellsToWinCount = (this.mSize*this.mSize)-numOfMines ;
         //create cells
         for (int i = 0; i < this.mSize * this.mSize; i++)
             this.mCells[i] = new Cell();
