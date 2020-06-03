@@ -37,16 +37,25 @@ public class SensorsService extends Service implements SensorEventListener {
     SensorManager mSensorManager;
     Sensor mAccel;
 
-    SensorEvent mFirstEvent;
+    float firstEventAxisX=0.0f ;
+    float firstEventAxisY =0.0f;
+    float firstEventAxisZ =0.0f;
 
     public class SensorServiceBinder extends Binder {
 
+        void onSeansorchanged(SensorEvent event){
+            SensorsService.this.onSensorChanged(event);
+            if(SensorsService.this.currentAlarmState==SensorServiceListener.ALARM_STATE.ON){
+                Log.e("Binder", "ALARM!!!");
+
+            }
+
+        }
 
 
         void registerListener(SensorServiceListener listener) {
-            Log.d("Binder", "registering...");
+            Log.e("Binder", "registering...");
             mListener = listener;
-
         }
 
         void startSensors() {
@@ -56,6 +65,7 @@ public class SensorsService extends Service implements SensorEventListener {
         void stopSensors() {
             mSensorManager.unregisterListener(SensorsService.this);
         }
+
 
     }
 
@@ -75,9 +85,9 @@ public class SensorsService extends Service implements SensorEventListener {
         mAccel = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
         if(mAccel != null) {
-            Log.d("Sensors ouput" , "Accelerometer avilable");
+            Log.e("Sensors ouput" , "Accelerometer avilable");
         } else {
-            Log.d("Sensors ouput" , "Accelerometer NOT Availible");
+            Log.e("Sensors ouput" , "Accelerometer NOT Availible");
         }
     }
 
@@ -102,22 +112,36 @@ public class SensorsService extends Service implements SensorEventListener {
     @Override
     public void onSensorChanged(SensorEvent event) {
 
-        if(mFirstEvent == null) {
-            mFirstEvent = event;
+        if(firstEventAxisX == 0.0f) {
+
+            firstEventAxisX= event.values[0];
+            firstEventAxisY= event.values[1];
+            firstEventAxisZ = event.values[2];
+            Log.e(TAG,"FIRST EVENT!!!");
+
         } else {
 
-            double absDiffX = Math.abs(mFirstEvent.values[0] - event.values[0]);
-            double absDiffY = Math.abs(mFirstEvent.values[1] - event.values[1]);
-            double absDiffZ = Math.abs(mFirstEvent.values[2] - event.values[2]);
+            float axisX = event.values[0];
+            float axisY = event.values[1];
+            float axisZ = event.values[2];
 
+            Log.e("First EVENR", "" + firstEventAxisX + " " + firstEventAxisY + " " + firstEventAxisZ);
+            Log.e("Current EVENR", "" + event.values[0] + " " + event.values[1] + " " + event.values[2]);
+//TODO check why mFirstEvent is equal to event
+            double absDiffX = Math.abs(firstEventAxisX - event.values[0]);
+            double absDiffY = Math.abs(firstEventAxisY - event.values[1]);
+            double absDiffZ = Math.abs(firstEventAxisZ - event.values[2]);
 
-            Log.d("DIFFS", "" + absDiffX + " " + absDiffY + " " + absDiffZ);
+            Log.e("DIFFS", "" + absDiffX + " " + absDiffY + " " + absDiffZ);
 
             SensorServiceListener.ALARM_STATE previousState = currentAlarmState;
             if (absDiffX > THRESHOLD || absDiffY > THRESHOLD || absDiffZ > THRESHOLD ) {
                 this.currentAlarmState = SensorServiceListener.ALARM_STATE.ON;
+               Log.e(TAG,"ALARM ON!");
+
             } else {
                 this.currentAlarmState = SensorServiceListener.ALARM_STATE.OFF;
+                Log.e(TAG,"ALARM OFF!");
             }
 
             if(previousState != currentAlarmState) {
@@ -126,7 +150,8 @@ public class SensorsService extends Service implements SensorEventListener {
 
         }
 
-        Log.d(TAG,event.values[0] + " " + event.values[1] + " " + event.values[2]);
+       // Log.e(TAG,event.values[0] + " " + event.values[1] + " " + event.values[2]);
+
 
     }
 }

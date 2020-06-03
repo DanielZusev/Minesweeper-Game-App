@@ -4,6 +4,9 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.SystemClock;
@@ -57,6 +60,12 @@ public class GameActivity extends AppCompatActivity  implements  SensorServiceLi
         }
     });
 
+
+
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,10 +90,12 @@ public class GameActivity extends AppCompatActivity  implements  SensorServiceLi
         restartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mGame.getmBoard().CreateNewBoard(boardSize);
-                timer.setBase(SystemClock.elapsedRealtime());
-                timer.start();
-                mCellAdapter.notifyDataSetChanged();
+
+                    mGame.getmBoard().CreateNewBoard(boardSize);
+                    timer.setBase(SystemClock.elapsedRealtime());
+                    timer.start();
+                    mCellAdapter.notifyDataSetChanged();
+
             }
         });
 
@@ -117,6 +128,10 @@ public class GameActivity extends AppCompatActivity  implements  SensorServiceLi
                     flagButton.setImageResource(R.drawable.flagged);
             }
         });
+
+
+
+
     }
 
     public void openEndActivity(Boolean endStatus, int boardSize) {
