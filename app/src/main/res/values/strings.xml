@@ -10,4 +10,19 @@
     <string name="end_game_image">End Game Image</string>
     <string name="flag_image">Flag Image</string>
     <string name="main_logo_desc">main logo of the game</string>
+    <string name="records_button">Records</string>
+    <string name="hello_blank_fragment">Hello</string>
+    <string name="easy_records">Easy</string>
+    <string name="hard_records">Hard</string>
+    <string name="extreme_records">Extreme</string>
+    <string name="first_score">1</string>
+    <string name="second_score">2</string>
+    <string name="third_score">3</string>
+    <string name="score_number">No.</string>
+    <string name="score_name">Name</string>
+    <string name="score_time">Time</string>
+    <string name="new_record">You Achived New Record !</string>
+    <string name="name_type">Type Your Name Here</string>
+    <string name="submit_button">Submit</string>
+
 </resources>

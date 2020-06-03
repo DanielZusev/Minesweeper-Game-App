@@ -11,23 +11,27 @@
     android:background="@drawable/main_new"
     >
 
-
-    <LinearLayout
+    <FrameLayout
+        android:id="@+id/fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="horizontal"
-        >
+        android:layout_height="386dp">
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:src="@drawable/new_logo"
-            android:layout_width="550dp"
-            android:layout_height="550dp"
-            app:srcCompat="@drawable/main_new"
-            android:contentDescription="@string/main_logo_desc"
-            />
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="550dp"
+                android:layout_height="550dp"
+                android:contentDescription="@string/main_logo_desc"
+                android:src="@drawable/new_logo"
+                app:srcCompat="@drawable/main_new" />
+
+        </LinearLayout>
+    </FrameLayout>
 
     <LinearLayout
         android:id="@+id/difficulty_layout"
@@ -77,6 +81,16 @@
             android:textSize="12sp">
         </Button>
     </LinearLayout>
+    <Button
+        android:id="@+id/records_button"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:text="@string/records_button"
+        android:background="@drawable/records_button_shape"
+        >
+    </Button>
 
     <Button
         android:id="@+id/start_button"
@@ -86,6 +100,7 @@
         android:gravity="center"
         android:text="@string/start_button"
         android:background="@drawable/start_button_shape"
+        android:layout_marginTop="15dp"
         >
     </Button>
 

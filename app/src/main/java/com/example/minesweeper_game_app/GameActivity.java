@@ -15,7 +15,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.minesweeper_game_app.logic.CellAdapter;
 import com.example.minesweeper_game_app.logic.Game;
 
-import java.util.Random;
 
 public class GameActivity extends AppCompatActivity {
 
@@ -115,6 +114,7 @@ public class GameActivity extends AppCompatActivity {
         Intent intent = new Intent(this, EndActivity.class);
         intent.putExtra("END_STATUS", endStatus);
         intent.putExtra("BOARD_SIZE", boardSize);
+        intent.putExtra("TIME", toTime(timer));
         startActivity(intent);
         finish();
     }
@@ -124,5 +124,22 @@ public class GameActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    public static int toTime(Chronometer timer){
+        long time = SystemClock.elapsedRealtime() - timer.getBase();
+        int h = (int)(time /3600000);
+        int m = (int)(time - h*3600000)/60000;
+        int s = (int)(time - h*3600000- m*60000)/1000 ;
+        int intTime =m*60 + s;
+        return intTime;
+    }
+
+    public static String fromTime(int time){
+        int h = time / 3600;
+        int m = (int)(time - h*3600)/60;
+        int s = (int)(time - h*3600 - m*60);
+        String timer = m + ":" + s;
+        return timer;
     }
 }
