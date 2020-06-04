@@ -235,6 +235,8 @@ public class GameActivity extends AppCompatActivity  implements  SensorServiceLi
           manageThread.start();
         }else{
             this.alarmState=ALARM_STATE.OFF;
+
+            manageThread.interrupt();
         }
 
     }
