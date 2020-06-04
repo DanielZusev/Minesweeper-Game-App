@@ -23,6 +23,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.minesweeper_game_app.logic.CellAdapter;
 import com.example.minesweeper_game_app.logic.Game;
 
+import static java.lang.Thread.sleep;
+
 
 public class GameActivity extends AppCompatActivity  implements  SensorServiceListener{
 
@@ -30,13 +32,14 @@ public class GameActivity extends AppCompatActivity  implements  SensorServiceLi
     SensorsService.SensorServiceBinder mBinder;
     boolean isBound = false;
 
+    Thread manageThread;
     Game mGame;
     GridView mGridView;
     Button restartButton;
     ImageView flagButton;
     CellAdapter mCellAdapter;
     Chronometer timer;
-
+    SensorServiceListener.ALARM_STATE alarmState = ALARM_STATE.OFF ;
     int boardSize;
     Thread t = new Thread(new Runnable() {
         @Override
@@ -59,6 +62,29 @@ public class GameActivity extends AppCompatActivity  implements  SensorServiceLi
         }
     });
 
+    Thread addMinesAndUncoverThread = new Thread(new Runnable() {
+        @Override
+        public void run() {
+            while(alarmState== ALARM_STATE.ON) {
+                mGame.sensorIsActive();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mCellAdapter.notifyDataSetChanged();
+                    }
+                });
+                if(mGame.getmBoard().getNumOfMines()==boardSize*boardSize) {
+                    t.start();
+                    openEndActivity(false, boardSize);
+                }
+                try {
+                    sleep(5000  );
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
