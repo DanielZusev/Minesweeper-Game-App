@@ -63,6 +63,7 @@ public class EndActivity extends AppCompatActivity {
         if (endStatus) {
             setVictory();
             checkNewRecord();
+            animation.setBackground(getDrawable(R.drawable.win_animation));
         }
         else {
             setGameOver();
@@ -72,7 +73,7 @@ public class EndActivity extends AppCompatActivity {
 
     public void setVictory() {
         imageView.setImageResource(R.drawable.victory);
-        animation.setBackground(getDrawable(R.drawable.win_animation));
+
     }
 
     public void setGameOver() {

@@ -15,27 +15,27 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/new_record_text"
-            android:layout_width="match_parent"
-            android:layout_height="87dp"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:text="@string/new_record" />
-
 
         <ImageView
             android:id="@+id/animation"
             android:layout_width="284dp"
-            android:layout_height="187dp"
+            android:layout_height="160dp"
             android:layout_gravity="center">
 
         </ImageView>
 
+        <TextView
+            android:id="@+id/new_record_text"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/new_record" />
+
         <EditText
             android:id="@+id/text_box"
             android:layout_width="291dp"
-            android:layout_height="36dp"
+            android:layout_height="65dp"
             android:layout_gravity="center"
             android:autofillHints="@string/name_type"
             android:inputType="text" />
