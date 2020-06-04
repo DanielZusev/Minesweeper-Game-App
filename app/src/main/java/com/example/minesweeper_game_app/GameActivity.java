@@ -23,9 +23,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.minesweeper_game_app.logic.CellAdapter;
 import com.example.minesweeper_game_app.logic.Game;
 
-import java.util.Random;
-
 import static java.lang.Thread.sleep;
+
 
 public class GameActivity extends AppCompatActivity  implements  SensorServiceListener{
 
@@ -53,7 +52,7 @@ public class GameActivity extends AppCompatActivity  implements  SensorServiceLi
                     mCellAdapter.notifyDataSetChanged();
                     try {
 
-                        sleep(  2500);
+                        Thread.sleep(  2500);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -87,18 +86,10 @@ public class GameActivity extends AppCompatActivity  implements  SensorServiceLi
         }
     });
 
-
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
 
-
- /*       addMinesThread.run();*/
 
         setContentView(R.layout.activity_game);
 
@@ -157,13 +148,13 @@ public class GameActivity extends AppCompatActivity  implements  SensorServiceLi
                     flagButton.setImageResource(R.drawable.flagged);
             }
         });
-
     }
 
     public void openEndActivity(Boolean endStatus, int boardSize) {
         Intent intent = new Intent(this, EndActivity.class);
         intent.putExtra("END_STATUS", endStatus);
         intent.putExtra("BOARD_SIZE", boardSize);
+        intent.putExtra("TIME", toTime(timer));
         startActivity(intent);
         finish();
     }
@@ -175,7 +166,6 @@ public class GameActivity extends AppCompatActivity  implements  SensorServiceLi
         finish();
     }
 
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -183,7 +173,6 @@ public class GameActivity extends AppCompatActivity  implements  SensorServiceLi
         if(isBound) {
             mBinder.startSensors();
         }
-
     }
 
     @Override
@@ -210,7 +199,6 @@ public class GameActivity extends AppCompatActivity  implements  SensorServiceLi
             unbindService(mConnection);
             isBound = false;
         }
-
     }
 
     private ServiceConnection mConnection = new ServiceConnection() {
@@ -235,18 +223,22 @@ public class GameActivity extends AppCompatActivity  implements  SensorServiceLi
     @Override
     public void alarmStateChanged(ALARM_STATE state) {
         Log.d("ACTIVITY", "STATE: " + state);
-
-        if(state==ALARM_STATE.ON) {
-            alarmState = ALARM_STATE.ON;
-            manageThread = new Thread(addMinesAndUncoverThread);
-            manageThread.start();
-        }else{
-            alarmState = ALARM_STATE.OFF;
-        }
-
     }
 
+ public static int toTime(Chronometer timer){
+        long time = SystemClock.elapsedRealtime() - timer.getBase();
+        int h = (int)(time /3600000);
+        int m = (int)(time - h*3600000)/60000;
+        int s = (int)(time - h*3600000- m*60000)/1000 ;
+        int intTime =m*60 + s;
+        return intTime;
+    }
 
-
-
+    public static String fromTime(int time){
+        int h = time / 3600;
+        int m = (int)(time - h*3600)/60;
+        int s = (int)(time - h*3600 - m*60);
+        String timer = m + ":" + s;
+        return timer;
+    }
 }

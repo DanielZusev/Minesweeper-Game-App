@@ -8,22 +8,63 @@
     android:layout_gravity="bottom"
     android:paddingBottom="25dp">
 
-    <ImageView
-        android:id="@+id/end_screen_image"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/eight"
-        android:contentDescription="@string/end_game_image"/>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="410dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+
+        <ImageView
+            android:id="@+id/animation"
+            android:layout_width="284dp"
+            android:layout_height="160dp"
+            android:layout_gravity="center">
+
+        </ImageView>
+
+        <TextView
+            android:id="@+id/new_record_text"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/new_record" />
+
+        <EditText
+            android:id="@+id/text_box"
+            android:layout_width="291dp"
+            android:layout_height="65dp"
+            android:layout_gravity="center"
+            android:autofillHints="@string/name_type"
+            android:inputType="text" />
+
+        <ImageView
+            android:id="@+id/end_screen_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/end_game_image"
+            app:srcCompat="@drawable/eight" />
+
+        <Button
+            android:id="@+id/submit_button"
+            android:layout_width="110dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/submit_button_shape"
+            android:text="@string/submit_button"
+            android:textColor="#000000"
+            android:textSize="12sp" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/button_layout"
         android:layout_width="match_parent"
-        android:layout_height="186dp"
+        android:layout_height="163dp"
         android:layout_gravity="bottom"
         android:gravity="center"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
 
         <Button
             android:id="@+id/end_game_button"
@@ -33,8 +74,8 @@
             android:layout_marginBottom="30dp"
             android:background="@drawable/end_game_button_shape"
             android:gravity="center"
-            android:text="@string/end_game_button"
-            android:onClick="endGame">
+            android:onClick="endGame"
+            android:text="@string/end_game_button">
 
         </Button>
 
@@ -45,8 +86,8 @@
             android:layout_gravity="center_horizontal"
             android:background="@drawable/start_button_shape"
             android:gravity="center"
-            android:text="@string/start_button"
-            android:onClick="startNewGame">
+            android:onClick="startNewGame"
+            android:text="@string/start_button">
 
         </Button>
 
