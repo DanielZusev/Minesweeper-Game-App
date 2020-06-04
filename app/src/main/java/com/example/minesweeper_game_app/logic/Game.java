@@ -56,4 +56,11 @@ public class Game {
         }
     }
 
+    public void sensorIsActive(){
+        //TODO game over
+
+        this.mBoard.sensorIsActive();
+        //if(this.mBoard.getBoardSize()*this.mBoard.getBoardSize() - this.mBoard.getCellsToWinCount())
+    }
+
 }

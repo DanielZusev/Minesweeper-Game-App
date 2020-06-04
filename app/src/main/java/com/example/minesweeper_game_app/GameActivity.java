@@ -25,19 +25,22 @@ import com.example.minesweeper_game_app.logic.Game;
 
 import java.util.Random;
 
+import static java.lang.Thread.sleep;
+
 public class GameActivity extends AppCompatActivity  implements  SensorServiceListener{
 
 
     SensorsService.SensorServiceBinder mBinder;
     boolean isBound = false;
 
+    Thread manageThread;
     Game mGame;
     GridView mGridView;
     Button restartButton;
     ImageView flagButton;
     CellAdapter mCellAdapter;
     Chronometer timer;
-
+    SensorServiceListener.ALARM_STATE alarmState = ALARM_STATE.OFF ;
     int boardSize;
     Thread t = new Thread(new Runnable() {
         @Override
@@ -50,7 +53,7 @@ public class GameActivity extends AppCompatActivity  implements  SensorServiceLi
                     mCellAdapter.notifyDataSetChanged();
                     try {
 
-                        Thread.sleep(  2500);
+                        sleep(  2500);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -60,6 +63,29 @@ public class GameActivity extends AppCompatActivity  implements  SensorServiceLi
         }
     });
 
+    Thread addMinesAndUncoverThread = new Thread(new Runnable() {
+        @Override
+        public void run() {
+            while(alarmState== ALARM_STATE.ON) {
+                mGame.sensorIsActive();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mCellAdapter.notifyDataSetChanged();
+                    }
+                });
+                if(mGame.getmBoard().getNumOfMines()==boardSize*boardSize) {
+                    t.start();
+                    openEndActivity(false, boardSize);
+                }
+                try {
+                    sleep(5000  );
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    });
 
 
 
@@ -68,8 +94,11 @@ public class GameActivity extends AppCompatActivity  implements  SensorServiceLi
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
 
+
+ /*       addMinesThread.run();*/
 
         setContentView(R.layout.activity_game);
 
@@ -128,9 +157,6 @@ public class GameActivity extends AppCompatActivity  implements  SensorServiceLi
                     flagButton.setImageResource(R.drawable.flagged);
             }
         });
-
-
-
 
     }
 
@@ -209,6 +235,15 @@ public class GameActivity extends AppCompatActivity  implements  SensorServiceLi
     @Override
     public void alarmStateChanged(ALARM_STATE state) {
         Log.d("ACTIVITY", "STATE: " + state);
+
+        if(state==ALARM_STATE.ON) {
+            alarmState = ALARM_STATE.ON;
+            manageThread = new Thread(addMinesAndUncoverThread);
+            manageThread.start();
+        }else{
+            alarmState = ALARM_STATE.OFF;
+        }
+
     }
 
 

@@ -8,12 +8,14 @@ public class Board {
     private Cell[] mCells;
     private int mSize;
     private int cellsToWinCount;
+    private int numOfMines;
 
     public Board(int mSize,int numOfMines) {
 
         setmSize(mSize);
+        this.numOfMines = numOfMines;
         this.mCells = new Cell[this.mSize * this.mSize];
-        CreateNewBoard(numOfMines);
+        CreateNewBoard(this.numOfMines);
     }
 
     public void setmSize(int mSize) {
@@ -21,7 +23,8 @@ public class Board {
     }
 
     public void CreateNewBoard(int numOfMines) {
-        this.cellsToWinCount = (this.mSize*this.mSize)-numOfMines ;
+        this.numOfMines = numOfMines;
+        this.cellsToWinCount = (this.mSize*this.mSize)-this.numOfMines;
         //create cells
         for (int i = 0; i < this.mSize * this.mSize; i++)
             this.mCells[i] = new Cell();
@@ -29,7 +32,7 @@ public class Board {
         Random r = new Random();
         int minePos;
 
-        for (int i = 0; i < numOfMines; i++) {
+        for (int i = 0; i < this.numOfMines; i++) {
             minePos = r.nextInt(this.mSize * this.mSize);
 
             if (mCells[minePos].isMined())
@@ -40,6 +43,8 @@ public class Board {
             }
         }
     }
+
+
 
     public Boolean OnClick(int pos, boolean isFlagged) {
         if(this.mCells[pos].getmState()!= Cell.State.UNCOVERED&&this.mCells[pos].getmState()!= Cell.State.FLAGGED)
@@ -149,8 +154,36 @@ public class Board {
         return true;
     }
 
+
+    public void sensorIsActive() {
+        Random r = new Random();
+
+        //Check if all cells Uncovered
+        if(cellsToWinCount+numOfMines==mSize*mSize) {
+            boolean mineAdded = false;
+            while (!mineAdded) {
+                int newMinePos = r.nextInt(this.mSize * this.mSize);
+                if (!this.mCells[newMinePos].isMined()) {
+                    this.mCells[newMinePos].setMined(true);
+                    this.numOfMines++;
+                    this.cellsToWinCount--;
+                    mineAdded = true;
+                }
+            }
+        }else {
+            boolean cellCovered = false;
+            while (!cellCovered) {
+                int cellToUnCoverPos = r.nextInt(this.mSize * this.mSize);
+                if (this.mCells[cellToUnCoverPos].getmState() != Cell.State.UNCOVERED) {
+                    this.mCells[cellToUnCoverPos].setState(Cell.State.UNCOVERED);
+                    this.cellsToWinCount++;
+                    cellCovered = true;
+                }
+            }
+        }
+    }
     public int getCellsToWinCount() {
         return cellsToWinCount;
     }
-
+    public int getNumOfMines(){ return  this.numOfMines; }
 }

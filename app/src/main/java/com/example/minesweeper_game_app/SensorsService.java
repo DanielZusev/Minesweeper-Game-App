@@ -25,8 +25,7 @@ public class SensorsService extends Service implements SensorEventListener {
 
     private final static String TAG = "SENSOR_SERVICE";
 
-    private final double THRESHOLD = 1;
-
+    private final double THRESHOLD = 4;
     private SensorServiceListener.ALARM_STATE currentAlarmState = SensorServiceListener.ALARM_STATE.OFF;
 
     // Binder given to clients
@@ -65,7 +64,7 @@ public class SensorsService extends Service implements SensorEventListener {
         void stopSensors() {
             mSensorManager.unregisterListener(SensorsService.this);
         }
-
+        SensorServiceListener.ALARM_STATE getAlarmState(){return SensorsService.this.currentAlarmState;}
 
     }
 
@@ -137,7 +136,10 @@ public class SensorsService extends Service implements SensorEventListener {
             SensorServiceListener.ALARM_STATE previousState = currentAlarmState;
             if (absDiffX > THRESHOLD || absDiffY > THRESHOLD || absDiffZ > THRESHOLD ) {
                 this.currentAlarmState = SensorServiceListener.ALARM_STATE.ON;
-               Log.e(TAG,"ALARM ON!");
+                Log.e(TAG,"ALARM ON!");
+
+
+
 
             } else {
                 this.currentAlarmState = SensorServiceListener.ALARM_STATE.OFF;
