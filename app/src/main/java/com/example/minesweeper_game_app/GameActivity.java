@@ -60,11 +60,6 @@ public class GameActivity extends AppCompatActivity  implements  SensorServiceLi
     });
 
 
-
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -127,10 +122,6 @@ public class GameActivity extends AppCompatActivity  implements  SensorServiceLi
                     flagButton.setImageResource(R.drawable.flagged);
             }
         });
-
-
-
-
     }
 
     public void openEndActivity(Boolean endStatus, int boardSize) {
@@ -156,7 +147,6 @@ public class GameActivity extends AppCompatActivity  implements  SensorServiceLi
         if(isBound) {
             mBinder.startSensors();
         }
-
     }
 
     @Override
@@ -183,7 +173,6 @@ public class GameActivity extends AppCompatActivity  implements  SensorServiceLi
             unbindService(mConnection);
             isBound = false;
         }
-
     }
 
     private ServiceConnection mConnection = new ServiceConnection() {
@@ -226,5 +215,4 @@ public class GameActivity extends AppCompatActivity  implements  SensorServiceLi
         String timer = m + ":" + s;
         return timer;
     }
-
 }
