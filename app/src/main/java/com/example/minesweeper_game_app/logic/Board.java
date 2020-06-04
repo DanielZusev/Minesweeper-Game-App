@@ -155,7 +155,7 @@ public class Board {
     }
 
 
-    public void sensorIsActive() {
+    public boolean sensorIsActive() {
         Random r = new Random();
 
         //Check if all cells Uncovered
@@ -170,6 +170,8 @@ public class Board {
                     mineAdded = true;
                 }
             }
+            return true;
+
         }else {
             boolean cellCovered = false;
             while (!cellCovered) {
@@ -180,6 +182,8 @@ public class Board {
                     cellCovered = true;
                 }
             }
+            return false;
+
         }
     }
     public int getCellsToWinCount() {

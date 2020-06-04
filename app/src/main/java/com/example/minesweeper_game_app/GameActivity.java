@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -34,11 +35,13 @@ public class GameActivity extends AppCompatActivity  implements  SensorServiceLi
 
     Thread manageThread;
     Game mGame;
+    private Context gameActivity ;
     GridView mGridView;
     Button restartButton;
     ImageView flagButton;
     CellAdapter mCellAdapter;
     Chronometer timer;
+    boolean isMineAdded = false;
     SensorServiceListener.ALARM_STATE alarmState = ALARM_STATE.OFF ;
     int boardSize;
     Thread t = new Thread(new Runnable() {
@@ -66,10 +69,14 @@ public class GameActivity extends AppCompatActivity  implements  SensorServiceLi
         @Override
         public void run() {
             while(alarmState== ALARM_STATE.ON) {
-                mGame.sensorIsActive();
+              isMineAdded= mGame.sensorIsActive();
+
+
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        if(isMineAdded)
+                        Toast.makeText(gameActivity, "Mine Added!", Toast.LENGTH_SHORT).show();
                         mCellAdapter.notifyDataSetChanged();
                     }
                 });
@@ -89,7 +96,7 @@ public class GameActivity extends AppCompatActivity  implements  SensorServiceLi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        gameActivity = GameActivity.this;
 
         setContentView(R.layout.activity_game);
 
@@ -222,7 +229,14 @@ public class GameActivity extends AppCompatActivity  implements  SensorServiceLi
 
     @Override
     public void alarmStateChanged(ALARM_STATE state) {
-        Log.d("ACTIVITY", "STATE: " + state);
+        if(state == ALARM_STATE.ON){
+            this.alarmState=ALARM_STATE.ON;
+          manageThread=new Thread(this.addMinesAndUncoverThread);
+          manageThread.start();
+        }else{
+            this.alarmState=ALARM_STATE.OFF;
+        }
+
     }
 
  public static int toTime(Chronometer timer){

@@ -56,10 +56,10 @@ public class Game {
         }
     }
 
-    public void sensorIsActive(){
+    public boolean sensorIsActive(){
         //TODO game over
 
-        this.mBoard.sensorIsActive();
+        return this.mBoard.sensorIsActive();
         //if(this.mBoard.getBoardSize()*this.mBoard.getBoardSize() - this.mBoard.getCellsToWinCount())
     }
 
